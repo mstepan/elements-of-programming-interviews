@@ -12,6 +12,15 @@ public class CountWaysToTraverse2DArrayTest {
         assertEquals(6, CountWaysToTraverse2DArray.countWays(3));
         assertEquals(20, CountWaysToTraverse2DArray.countWays(4));
         assertEquals(70, CountWaysToTraverse2DArray.countWays(5));
+        assertEquals(252, CountWaysToTraverse2DArray.countWays(6));
+    }
+
+    @Test
+    public void countWaysBiggerSize() {
+        for (int size = 7; size < 15; ++size) {
+            assertEquals(CountWaysToTraverse2DArray.countWaysBruteforce(size),
+                    CountWaysToTraverse2DArray.countWays(size));
+        }
     }
 
     @Test

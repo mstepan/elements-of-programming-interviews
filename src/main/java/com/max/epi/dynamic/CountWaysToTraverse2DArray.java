@@ -14,10 +14,9 @@ final class CountWaysToTraverse2DArray {
     private CountWaysToTraverse2DArray() {
     }
 
-
     /**
      * time: O(N^2)
-     * space: O(N^2)
+     * space: O(N)
      */
     static int countWays(int n) {
         checkArgument(n >= 0);
@@ -26,19 +25,39 @@ final class CountWaysToTraverse2DArray {
             return n;
         }
 
-        int[][] sol = new int[n][n];
-        Arrays.fill(sol[0], 1);
+        int[] prev = new int[n];
+        Arrays.fill(prev, 1);
+
+        int[] cur = new int[n];
 
         for (int row = 1; row < n; ++row) {
-            sol[row][0] = 1;
+            cur[0] = 1;
 
             for (int col = 1; col < n; ++col) {
-                sol[row][col] = sol[row][col - 1] + sol[row - 1][col];
+                cur[col] = cur[col - 1] + prev[col];
             }
+
+            System.arraycopy(cur, 0, prev, 0, cur.length);
+            Arrays.fill(cur, 0);
         }
 
 
-        return sol[n - 1][n - 1];
+        return prev[n - 1];
+    }
+
+    /**
+     * Bruteforce solution for testing purpose with time O(2^N) and space O(N).
+     */
+    static int countWaysBruteforce(int n) {
+        return countWaysRec(n - 1, n - 1);
+    }
+
+    private static int countWaysRec(int row, int col) {
+        if (row == 0 || col == 0) {
+            return 1;
+        }
+
+        return countWaysRec(row, col - 1) + countWaysRec(row - 1, col);
     }
 
 }
