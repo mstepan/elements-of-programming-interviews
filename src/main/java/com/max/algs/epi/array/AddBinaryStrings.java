@@ -1,13 +1,8 @@
 package com.max.algs.epi.array;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static junit.framework.Assert.assertEquals;
 
 
 public class AddBinaryStrings {
@@ -69,25 +64,6 @@ public class AddBinaryStrings {
                 throw new IllegalArgumentException("Not a binary string: " + str);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        try {
-            JUnitCore junit = new JUnitCore();
-            Result result = junit.run(AddBinaryStrings.class);
-
-            for (Failure failure : result.getFailures()) {
-                System.out.println(failure.getTrace());
-            }
-        }
-        catch (Exception ex) {
-            LOG.error(ex.getMessage(), ex);
-        }
-    }
-
-    @Test
-    public void addBinaryStrings() {
-        assertEquals("10011", addBinaryStrings("0110", "1101"));
     }
 
 }
