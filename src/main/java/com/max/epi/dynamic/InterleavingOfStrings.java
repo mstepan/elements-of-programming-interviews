@@ -5,7 +5,9 @@ import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-
+/**
+ * 17.2.variant - Design an algorithm that check if 'base' string is interleaving of 's1' and 's2' strings.
+ */
 final class InterleavingOfStrings {
 
     private InterleavingOfStrings() {
