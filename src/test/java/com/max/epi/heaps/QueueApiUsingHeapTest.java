@@ -1,16 +1,17 @@
 package com.max.epi.heaps;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit tests for QueueApiUsingHeap
  */
-final class QueueApiUsingHeapTest {
+public final class QueueApiUsingHeapTest {
 
     @Test
-    void enqAndDeq() {
+    public void enqAndDeq() {
 
         QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
 
@@ -35,30 +36,29 @@ final class QueueApiUsingHeapTest {
         assertEquals(Integer.valueOf(3), queue.poll());
     }
 
-    @Test
-    void pollFromEmptyQueue() {
-        assertThrows(IllegalStateException.class, () -> {
-            QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
-            queue.poll();
-        });
+    @Test(expected = IllegalStateException.class)
+    public void pollFromEmptyQueue() {
+
+        QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
+        queue.poll();
 
 
     }
 
     @Test
-    void peekFromEmptyQueue() {
+    public void peekFromEmptyQueue() {
         QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
         assertSame(null, queue.peek());
     }
 
-    @Test
-    void enqAndDeqWithOverflow() {
-        QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
-
-        for (long i = 0; i < (2L * Integer.MAX_VALUE) + 2L; ++i) {
-            queue.add((int) i);
-            queue.poll();
-        }
-    }
+//    @Test
+//    public void enqAndDeqWithOverflow() {
+//        QueueApiUsingHeap.QueueAdapter queue = new QueueApiUsingHeap.QueueAdapter();
+//
+//        for (long i = 0; i < (2L * Integer.MAX_VALUE) + 2L; ++i) {
+//            queue.add((int) i);
+//            queue.poll();
+//        }
+//    }
 
 }
