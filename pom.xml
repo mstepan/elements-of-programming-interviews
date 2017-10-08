@@ -9,7 +9,7 @@
     <properties>
         <google.guava.version>21.0</google.guava.version>
         <log4j.version>1.2.17</log4j.version>
-        <junit5.version>5.0.0-M3</junit5.version>
+        <junit4.version>4.12</junit4.version>
     </properties>
 
     <build>
@@ -44,9 +44,59 @@
                 </executions>
             </plugin>
 
-	</plugins>
+        </plugins>
     </build>
 
+    <profiles>
+
+        <!-- run only unit tests -->
+        <profile>
+            <id>normal</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/**/*ExhaustiveTest.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!-- run unit tests and exhaustive -->
+        <profile>
+            <id>exhaustive</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <forkMode>once</forkMode>
+                            <includes>
+                                <include>**/**/*Test.java</include>
+                                <include>**/**/*ExhaustiveTest.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <activation>
+                <property>
+                    <name>exhaustive</name>
+                </property>
+            </activation>
+        </profile>
+
+
+    </profiles>
 
     <dependencies>
 
@@ -66,7 +116,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit4.version}</version>
             <scope>test</scope>
         </dependency>
 

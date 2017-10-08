@@ -1,21 +1,17 @@
 package com.max.epi.dynamic;
 
 
-import org.apache.log4j.Logger;
-
-import java.lang.invoke.MethodHandles;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public final class InterleavingOfStrings {
+final class InterleavingOfStrings {
 
-
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
-
+    private InterleavingOfStrings() {
+    }
 
     /**
-     * Check is 'base' string is interleaving of 's1' and 's2' strings.
+     * Check is 'base' string is interleaving of 's1' and 's2' strings
+     * using dynamic programming approach.
      * <p>
      * N - s1.length()
      * M - s2.length()
@@ -23,7 +19,7 @@ public final class InterleavingOfStrings {
      * time: O(N*M)
      * space: O(min(N, M))
      */
-    private static boolean isInterleaving(String base, String s1, String s2) {
+    static boolean isInterleaving(String base, String s1, String s2) {
         checkNotNull(base);
         checkNotNull(s1);
         checkNotNull(s2);
@@ -48,6 +44,10 @@ public final class InterleavingOfStrings {
             otherStr = s1;
         }
 
+        return checkInterleavingOfString(base, minStr, otherStr);
+    }
+
+    private static boolean checkInterleavingOfString(String base, String minStr, String otherStr) {
         final int rows = otherStr.length() + 1;
         final int cols = minStr.length() + 1;
 
@@ -88,27 +88,5 @@ public final class InterleavingOfStrings {
         }
 
         return prev[cols - 1];
-    }
-
-    private InterleavingOfStrings() {
-
-        String base = "hewlorllod";
-//        String base = "hewlrloold";
-        String s1 = "hello";
-        String s2 = "world";
-
-        LOG.info("isInterleaving: " + isInterleaving(base, s1, s2));
-
-        LOG.info("InterleavingOfStrings done...");
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            new InterleavingOfStrings();
-        }
-        catch (Exception ex) {
-            LOG.error(ex.getMessage(), ex);
-        }
     }
 }
