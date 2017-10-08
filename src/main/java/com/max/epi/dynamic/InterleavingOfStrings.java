@@ -1,6 +1,8 @@
 package com.max.epi.dynamic;
 
 
+import java.util.Arrays;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
@@ -51,8 +53,11 @@ final class InterleavingOfStrings {
         final int rows = otherStr.length() + 1;
         final int cols = minStr.length() + 1;
 
-        boolean[] prev = new boolean[cols];
+        final boolean[] prev = new boolean[cols];
         prev[0] = true;
+
+        // we will reuse 'prev' and 'cur' arrays and do not allocate additional memory
+        final boolean[] cur = new boolean[cols];
 
         // fill 1st row
         for (int col = 1; col < cols; ++col) {
@@ -60,8 +65,6 @@ final class InterleavingOfStrings {
         }
 
         for (int row = 1; row < rows; ++row) {
-
-            boolean[] cur = new boolean[cols];
             cur[0] = prev[0] && (base.charAt(row - 1) == otherStr.charAt(row - 1));
 
             boolean lastRowCombinedOrValue = cur[0];
@@ -84,7 +87,8 @@ final class InterleavingOfStrings {
                 return false;
             }
 
-            prev = cur;
+            System.arraycopy(cur, 0, prev, 0, cur.length);
+            Arrays.fill(cur, false);
         }
 
         return prev[cols - 1];

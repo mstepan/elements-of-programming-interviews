@@ -16,15 +16,29 @@ public final class StringUtils {
     private static final Random RAND = ThreadLocalRandom.current();
     private static final char[] DNA_CHARS = "ACTG".toCharArray();
 
-    private static final char[] LOWER_CASE_ALPHA_NUM_ASCII = new char[('z' - 'a' + 1) + ('9' - '0' + 1)];
+    private static final char[] LOWER_CASE_ALPHA = new char['z' - 'a' + 1];
+    private static final char[] NUMERIC = new char['9' - '0' + 1];
+
+    private static final char[] LOWER_CASE_ALPHA_NUM_ASCII = new char[LOWER_CASE_ALPHA.length + NUMERIC.length];
 
     static {
-        int index = 0;
-        for (int ch = 'a'; ch <= 'z'; ++ch, ++index) {
-            LOWER_CASE_ALPHA_NUM_ASCII[index] = (char) ch;
+        for (int ch = 'a', index = 0; ch <= 'z'; ++ch, ++index) {
+            LOWER_CASE_ALPHA[index] = (char) ch;
         }
-        for (int ch = '0'; ch <= '9'; ++ch, ++index) {
-            LOWER_CASE_ALPHA_NUM_ASCII[index] = (char) ch;
+
+        for (int ch = '0', index = 0; ch <= '9'; ++ch, ++index) {
+            NUMERIC[index] = (char) ch;
+        }
+
+        int index = 0;
+        for (char ch : LOWER_CASE_ALPHA) {
+            LOWER_CASE_ALPHA_NUM_ASCII[index] = ch;
+            ++index;
+        }
+
+        for (char ch : NUMERIC) {
+            LOWER_CASE_ALPHA_NUM_ASCII[index] = ch;
+            ++index;
         }
     }
 
@@ -32,6 +46,21 @@ public final class StringUtils {
         throw new IllegalStateException("Can't instantiate utility only class");
     }
 
+
+    /**
+     * Generate random lower case ASCII string with alphabetic charcates only.
+     */
+    public static String generateLowCaseAlphaString(int length) {
+        checkArgument(length >= 0, "Negative 'length' passed: %s", length);
+
+        char[] arr = new char[length];
+
+        for (int i = 0; i < arr.length; ++i) {
+            arr[i] = LOWER_CASE_ALPHA[RAND.nextInt(LOWER_CASE_ALPHA.length)];
+        }
+
+        return new String(arr);
+    }
 
     /**
      * Generate random alpha-numeric lower case ASCII string.
