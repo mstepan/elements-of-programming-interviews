@@ -1,6 +1,5 @@
 package com.max.epi.heaps;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
@@ -41,7 +40,6 @@ public class StackApiUsingHeapTest {
     }
 
     @Test
-    @Ignore
     public void pushAndPopNoOverflow() {
         StackApiUsingHeap.StackAdapter stack = new StackApiUsingHeap.StackAdapter();
 
