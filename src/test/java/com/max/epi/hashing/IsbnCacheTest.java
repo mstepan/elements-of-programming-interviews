@@ -1,44 +1,57 @@
 package com.max.epi.hashing;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import static junit.framework.TestCase.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class IsbnCacheTest {
+final class IsbnCacheTest {
 
     private static void assertCacheSame(String[] arr, IsbnCache cache) {
 
         Iterator<IsbnCache.IsbnPricePair> it = cache.iterator();
 
         for (int i = 0; i < arr.length; ++i) {
-            assertTrue("Cache iterator is empty", it.hasNext());
+
+            assertTrue(it.hasNext(), "Cache iterator is empty");
             assertEquals(arr[i], it.next().isbn);
         }
 
-        assertFalse("Cache it not fully exhausted", it.hasNext());
+        assertFalse(it.hasNext(), "Cache it not fully exhausted");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void createNegativeCapacity() {
-        new IsbnCache(-10);
+    @Test
+    @DisplayName("negative capacity passed to cache")
+    void createNegativeCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new IsbnCache(-10);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void createZeroCapacity() {
-        new IsbnCache(0);
+    @Test
+    @DisplayName("zero capacity passed to cache")
+    void createZeroCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new IsbnCache(0);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void createBigCapacity() {
-        new IsbnCache(1_000_001);
+    @Test
+    @DisplayName("1_000_001 capacity passed to cache")
+    void createBigCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new IsbnCache(1_000_001);
+        });
     }
 
-    @Test(expected = ConcurrentModificationException.class)
-    public void iteratingAndModifyingAtTheSameTime() {
+    @Test
+    @DisplayName("iterate and modify cache should throw ConcurrentModificationException")
+    void iteratingAndModifyingAtTheSameTime() {
         IsbnCache cache = new IsbnCache(5);
         cache.put("1", 1.0);
         cache.put("2", 2.0);
@@ -52,11 +65,13 @@ public class IsbnCacheTest {
         cache.put("4", 4.0);
 
         assertTrue(it.hasNext());
-        it.next();
+
+        assertThrows(ConcurrentModificationException.class, it::next);
     }
 
     @Test
-    public void addAndGetNoEviction() {
+    @DisplayName("add/get values without eviction")
+    void addAndGetNoEviction() {
         IsbnCache cache = new IsbnCache(5);
 
         assertSame(null, cache.put("1", 1.0));
@@ -65,7 +80,7 @@ public class IsbnCacheTest {
 
         assertCacheSame(new String[]{"3", "2", "1"}, cache);
 
-        assertEquals(2.0, cache.get("2"), 0.0);
+        assertEquals(2.0, cache.get("2"), 0.0001);
         assertCacheSame(new String[]{"2", "3", "1"}, cache);
 
         assertSame(null, cache.put("4", 4.0));
@@ -73,13 +88,14 @@ public class IsbnCacheTest {
 
         assertCacheSame(new String[]{"5", "4", "2", "3", "1"}, cache);
 
-        assertEquals(4.0, cache.put("4", 40.0), 0.0);
+        assertEquals(4.0, cache.put("4", 40.0), 0.0001);
         assertCacheSame(new String[]{"4", "5", "2", "3", "1"}, cache);
 
     }
 
     @Test
-    public void addAndGetWithEviction() {
+    @DisplayName("add/get values with eviction")
+    void addAndGetWithEviction() {
         IsbnCache cache = new IsbnCache(5);
 
         for (int i = 0; i < 10; ++i) {

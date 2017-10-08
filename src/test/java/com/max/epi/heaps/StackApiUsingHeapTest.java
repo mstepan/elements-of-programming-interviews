@@ -1,15 +1,15 @@
 package com.max.epi.heaps;
 
-import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class StackApiUsingHeapTest {
+final class StackApiUsingHeapTest {
 
     @Test
-    public void pushAndPop() {
+    void pushAndPop() {
         StackApiUsingHeap.StackAdapter stack = new StackApiUsingHeap.StackAdapter();
 
         assertTrue(stack.isEmpty());
@@ -40,7 +40,7 @@ public class StackApiUsingHeapTest {
     }
 
     @Test
-    public void pushAndPopNoOverflow() {
+    void pushAndPopNoOverflow() {
         StackApiUsingHeap.StackAdapter stack = new StackApiUsingHeap.StackAdapter();
 
         for (long i = 0; i < (2L * Integer.MAX_VALUE) + 2L; ++i) {

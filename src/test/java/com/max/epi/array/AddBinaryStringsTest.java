@@ -1,14 +1,15 @@
 package com.max.epi.array;
 
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class AddBinaryStringsTest {
+final class AddBinaryStringsTest {
 
     @Test
-    public void addBinaryStrings() {
+    void addBinaryStrings() {
         assertEquals("10011", AddBinaryStrings.addBinaryStrings("0110", "1101"));
     }
 
