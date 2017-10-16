@@ -20,6 +20,32 @@ public final class ArrayUtils {
         super();
     }
 
+    public static boolean or(boolean[][] data) {
+
+        checkNotNull(data);
+
+        boolean res = false;
+
+        for (boolean[] row : data) {
+            for (boolean val : row) {
+                res = res || val;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Check all dimensions of 2D 'data' aray are not null.
+     */
+    public static void checkAllDimensionsNotNull(int[][] data) {
+        checkNotNull(data);
+
+        for (int[] row : data) {
+            checkNotNull(row);
+        }
+    }
+
     /**
      * Sum of bit differences among all pairs.
      * <p>
@@ -1020,7 +1046,6 @@ public final class ArrayUtils {
     public static int[] generateRandomArray(int length) {
         return generateRandomArray(length, Integer.MAX_VALUE);
     }
-
 
 
 }
