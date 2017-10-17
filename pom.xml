@@ -22,12 +22,12 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>1.9</source>
-                    <target>1.9</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
-                    <executable>$(/usr/libexec/java_home -v 1.9)/bin/javac</executable>
+                    <executable>$(/usr/libexec/java_home -v 1.8)/bin/javac</executable>
                     <fork>true</fork>
                 </configuration>
             </plugin>
