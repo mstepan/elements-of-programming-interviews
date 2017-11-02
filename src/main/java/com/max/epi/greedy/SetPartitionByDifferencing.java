@@ -10,6 +10,12 @@ final class SetPartitionByDifferencing {
         throw new IllegalStateException("Utility only class");
     }
 
+    /**
+     *
+     * 1. provide feedback to ARR policy.
+     * 2. provide feedback to all DSS blockers.
+     * 3. provide feedback about team problems in a general. (like Matt JWT and Oauth)
+     */
 
     /**
      * Greedy approach to partition a set into 2 subsets using differencing method.
@@ -24,8 +30,8 @@ final class SetPartitionByDifferencing {
             maxHeap.add(value);
         }
 
-        Set<Integer> set1 = new HashSet<>();
-        Set<Integer> set2 = new HashSet<>();
+        Set<Integer> set1 = new HashSet<>(arr.length);
+        Set<Integer> set2 = new HashSet<>(arr.length);
 
         partitionRec(maxHeap, set1, set2);
 
