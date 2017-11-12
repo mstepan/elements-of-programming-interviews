@@ -13,6 +13,29 @@ import static org.junit.Assert.assertNotNull;
 public class LongestSubsetOfPointsTest {
 
     @Test
+    public void longestSubsetOfPointsBacktracking() {
+        XYPoint[] points = {
+                new XYPoint(3, 6),
+                new XYPoint(1, 2),
+                new XYPoint(2, 4),
+                new XYPoint(4, 3),
+                new XYPoint(6, 6),
+                new XYPoint(1, 8),
+                new XYPoint(3, 2),
+        };
+
+        List<XYPoint> longestSubset = LongestSubsetOfPoints.longestSubsetOfPointsBacktracking(points);
+
+        assertNotNull(longestSubset);
+
+        assertEquals(list(
+                new XYPoint(1, 2),
+                new XYPoint(2, 4),
+                new XYPoint(3, 6),
+                new XYPoint(6, 6)), longestSubset);
+    }
+
+    @Test
     public void longestSubsetOfPoints() {
 
         XYPoint[] points = {
@@ -31,8 +54,8 @@ public class LongestSubsetOfPointsTest {
 
         assertEquals(list(
                 new XYPoint(1, 2),
-                new XYPoint(2, 4),
-                new XYPoint(3, 6),
+                new XYPoint(3, 2),
+                new XYPoint(4, 3),
                 new XYPoint(6, 6)), longestSubset);
 
     }
@@ -96,7 +119,7 @@ public class LongestSubsetOfPointsTest {
                 new XYPoint[]{new XYPoint(1, 3), new XYPoint(2, 1)});
 
         assertNotNull(longestSubset);
-        assertEquals(list(new XYPoint(2, 1)), longestSubset);
+        assertEquals(list(new XYPoint(1, 3)), longestSubset);
     }
 
     @Test

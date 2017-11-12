@@ -1,11 +1,6 @@
 package com.max.epi.dynamic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -17,16 +12,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 final class LongestSubsetOfPoints {
 
+    private static final XYPoint MIN_POINT = new XYPoint(Integer.MIN_VALUE, Integer.MIN_VALUE);
+
     private LongestSubsetOfPoints() {
         throw new IllegalStateException("Can't instantiate LongestSubsetOfPoints class");
     }
 
-    static List<XYPoint>longestSubsetOfPointsBacktracking(XYPoint[] points){
-
-        return null;
-    }
-
     /**
+     * N - points.length
+     * <p>
      * time: O(N*lgN) + O(N^2) = O(N^2)
      * space: O(N)
      */
@@ -102,15 +96,50 @@ final class LongestSubsetOfPoints {
         return res;
     }
 
-    private static List<XYPoint> toList(XYPoint[] arr) {
-        List<XYPoint> points = new ArrayList<>();
+    /**
+     * Backtracking solution to construct longest subset of points.
+     * <p>
+     * N - points.length
+     * <p>
+     * time: O(N*lgN + 2^N)= O(2^N)
+     * space: O(N)
+     */
+    static List<XYPoint> longestSubsetOfPointsBacktracking(XYPoint[] points) {
 
-        for (XYPoint singlePoint : arr) {
-            points.add(singlePoint);
+        Arrays.sort(points, XYPoint.ASC_CMP);
+
+        List<XYPoint> res = new ArrayList<>();
+
+        longestSubsetOfPointsRec(points, 0, new ArrayDeque<>(), res);
+
+        return res;
+    }
+
+    private static void longestSubsetOfPointsRec(XYPoint[] points, int index, Deque<XYPoint> partialSol,
+                                                 List<XYPoint> res) {
+
+        if (index == points.length) {
+            if (res.size() < partialSol.size()) {
+                res.clear();
+                res.addAll(partialSol);
+            }
+            return;
         }
 
-        return points;
+        XYPoint cur = points[index];
+        XYPoint last = partialSol.isEmpty() ? MIN_POINT : partialSol.peekLast();
+
+        // use 'cur'
+        if (last.x <= cur.x && last.y <= cur.y) {
+            partialSol.addLast(cur);
+            longestSubsetOfPointsRec(points, index + 1, partialSol, res);
+            partialSol.pollLast();
+        }
+
+        // skip 'cur'
+        longestSubsetOfPointsRec(points, index + 1, partialSol, res);
     }
+
 
     static class XYPoint {
 
@@ -120,7 +149,7 @@ final class LongestSubsetOfPoints {
          */
         private static final Comparator<XYPoint> ASC_CMP = (p1, p2) -> {
 
-            int xCmp = Integer.compare(p1.x, p2.y);
+            int xCmp = Integer.compare(p1.x, p2.x);
 
             if (xCmp != 0) {
                 return xCmp;
