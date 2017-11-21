@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public final class Pair<K, V> {
 
+    private static final Pair EMPTY = new Pair<>(null, null);
+
     protected final K first;
     private final V second;
 
@@ -19,12 +21,17 @@ public final class Pair<K, V> {
         this.second = second;
     }
 
-    public static <T> Pair<T, T> of(T val1, T val2) {
-        return new Pair<>(val1, val2);
+    public static <T> Pair<T, T> of(T first, T second) {
+        return new Pair<>(first, second);
     }
 
+    public static <T> Pair<T, T> from(T value) {
+        return new Pair<>(value, value);
+    }
+
+    @SuppressWarnings("unchecked")
     public static <T> Pair<T, T> empty() {
-        return new Pair<>(null, null);
+        return EMPTY;
     }
 
     public K getFirst() {
@@ -37,9 +44,14 @@ public final class Pair<K, V> {
 
     @Override
     public int hashCode() {
-
         if (hash == 0) {
-            hash = Objects.hash(first, second);
+
+            int hashedValue = 17;
+
+            hashedValue = 31 * hashedValue + (first == null ? 0 : first.hashCode());
+            hashedValue = 31 * hashedValue + (second == null ? 0 : second.hashCode());
+
+            hash = hashedValue;
         }
 
         return hash;
@@ -55,7 +67,8 @@ public final class Pair<K, V> {
         }
         Pair<?, ?> other = (Pair<?, ?>) obj;
 
-        return Objects.equals(first, other.first) && Objects.equals(second, other.second);
+        return Objects.equals(first, other.first) &&
+                Objects.equals(second, other.second);
     }
 
     @Override
