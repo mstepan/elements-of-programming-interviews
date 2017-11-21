@@ -5,7 +5,10 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * 18.7. Find majority element from array.
+ * 18.5. FIND THE MAJORITY ELEMENT.
+ * <p>
+ * Write a program that makes a single pass over the sequence and identifies the majority element.
+ * <p>
  * <p>
  * time: O(N)
  * space: O(1)
@@ -38,7 +41,7 @@ final class FindMajorityElement {
         return Optional.empty();
     }
 
-    private static char findPossibleMajority(char[] arr){
+    private static char findPossibleMajority(char[] arr) {
         char candidate = arr[0];
         int cnt = 1;
 
