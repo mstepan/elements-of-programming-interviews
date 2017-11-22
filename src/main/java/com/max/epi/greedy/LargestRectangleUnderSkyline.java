@@ -82,7 +82,7 @@ final class LargestRectangleUnderSkyline {
     }
 
     /**
-     * Divide and conquer solution. Find largest from left side, right side and
+     * Divide and conquer solution. Find largest start left side, right side and
      * crossing current middle index.
      * <p>
      * time: O(N*lgN)
