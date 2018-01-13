@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author Maksym Stepanenko.
  */
-public final class Pair<K, V> {
+public class Pair<K, V> {
 
     private static final Pair EMPTY = new Pair<>(null, null);
 
