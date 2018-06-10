@@ -116,12 +116,6 @@
             <version>${google.guava.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.valid4j</groupId>
-            <artifactId>valid4j</artifactId>
-            <version>${valid4j.version}</version>
-        </dependency>
-
         <!-- junit 4 -->
         <dependency>
             <groupId>junit</groupId>

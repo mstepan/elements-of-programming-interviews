@@ -6,9 +6,10 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
-import static org.valid4j.Assertive.*;
-import static org.valid4j.Assertive.ensure;
 
 /**
  * 11.6. Compute the K largest elements in a max-heap.
@@ -66,9 +67,9 @@ public class LargestElementInMaxHeap {
      * space: O(K)
      */
     private static int[] getLargestElements(Object[] maxHeapArr, int totalElementsCount, int k) {
-        require(maxHeapArr != null);
-        require(totalElementsCount <= maxHeapArr.length);
-        require(k >= 0);
+        checkNotNull(maxHeapArr);
+        checkArgument(totalElementsCount <= maxHeapArr.length);
+        checkArgument(k >= 0);
 
         if (k == 0 || totalElementsCount == 0) {
             return EMPTY_ARR;
@@ -78,13 +79,13 @@ public class LargestElementInMaxHeap {
 
         Queue<HeapEntry> candidates = new PriorityQueue<>(k, Collections.reverseOrder());
 
-        ensure(maxHeapArr.length > 0 && totalElementsCount > 0, "Empty array handled incorrectly");
+        checkState(maxHeapArr.length > 0 && totalElementsCount > 0, "Empty array handled incorrectly");
 
         candidates.add(new HeapEntry(maxHeapArr, 0));
 
         for (int i = 0; i < largest.length; ++i) {
 
-            ensure(!candidates.isEmpty(), "empty 'candidates' max-heap detected");
+            checkState(!candidates.isEmpty(), "empty 'candidates' max-heap detected");
 
             HeapEntry curEntry = candidates.poll();
 
@@ -102,7 +103,7 @@ public class LargestElementInMaxHeap {
             }
         }
 
-        ensure(largest.length == Math.min(k, maxHeapArr.length), "Incorrect number of elements selected");
+        checkState(largest.length == Math.min(k, maxHeapArr.length), "Incorrect number of elements selected");
 
         return largest;
     }

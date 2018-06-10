@@ -11,8 +11,6 @@ import java.util.Queue;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.valid4j.Assertive.require;
-
 
 /**
  * 19.7. Transform one string to another.

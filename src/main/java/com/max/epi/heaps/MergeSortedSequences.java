@@ -9,7 +9,8 @@ import com.google.common.base.Objects;
 import com.max.util.ArrayUtils;
 import org.apache.log4j.Logger;
 
-import static org.valid4j.Assertive.require;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 
 /**
  * Merge sorted sequences.
@@ -53,10 +54,10 @@ public class MergeSortedSequences {
      */
     private static Iterator<Integer> mergeSortedSequences(int[][] sequences) {
 
-        require(sequences != null, "null 'sequences' reference passed");
+        checkNotNull(sequences, "null 'sequences' reference passed");
 
         for (int[] arr : sequences) {
-            require(arr != null, "One of the sequences is null");
+            checkNotNull(arr, "One of the sequences is null");
         }
 
         return new SortedSeqIterator(sequences);
