@@ -2,10 +2,9 @@ package com.max.epi.array;
 
 import org.apache.log4j.Logger;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static org.valid4j.Assertive.require;
 
-
-public class AddBinaryStrings {
+final class AddBinaryStrings {
 
     private static final Logger LOG = Logger.getLogger(AddBinaryStrings.class);
 
@@ -52,8 +51,8 @@ public class AddBinaryStrings {
     }
 
     private static void checkBinaryString(String str) {
-        checkArgument(str != null, "null 'str' passed");
-        checkArgument(str.length() > 0, "0 length string passed");
+        require(str != null, "null 'str' passed");
+        require(str.length() > 0, "0 length string passed");
 
         char ch;
         for (int i = 0, strLength = str.length(); i < strLength; ++i) {

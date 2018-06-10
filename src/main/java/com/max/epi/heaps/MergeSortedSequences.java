@@ -1,15 +1,15 @@
 package com.max.epi.heaps;
 
-import com.google.common.base.Objects;
-import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.base.Objects;
+import com.max.util.ArrayUtils;
+import org.apache.log4j.Logger;
+
+import static org.valid4j.Assertive.require;
 
 /**
  * Merge sorted sequences.
@@ -36,13 +36,12 @@ public class MergeSortedSequences {
         sequences[2] = null;
 
         while (it.hasNext()) {
-            System.out.print(it.next() + ", ");
+            LOG.info(it.next() + ", ");
         }
 
-        System.out.println();
+        LOG.info("");
 
-
-        System.out.printf("'ClosestIntegerWithSameWeight' completed. java-%s %n", System.getProperty("java.version"));
+        LOG.info("'ClosestIntegerWithSameWeight' completed. java-" + System.getProperty("java.version"));
     }
 
     /**
@@ -54,10 +53,10 @@ public class MergeSortedSequences {
      */
     private static Iterator<Integer> mergeSortedSequences(int[][] sequences) {
 
-        checkNotNull(sequences, "null 'sequences' reference passed");
+        require(sequences != null, "null 'sequences' reference passed");
 
         for (int[] arr : sequences) {
-            checkNotNull(arr, "One of the sequences is null");
+            require(arr != null, "One of the sequences is null");
         }
 
         return new SortedSeqIterator(sequences);

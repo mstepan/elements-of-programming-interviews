@@ -1,11 +1,11 @@
 package com.max.epi.honor;
 
-import com.max.util.Pair;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.max.util.Pair;
+
+import static org.valid4j.Assertive.*;
 
 /**
  * Find longest substring with balanced parens using divide-and-conquer technique.
@@ -16,13 +16,12 @@ final class LongestSubstringWithBalancedParens {
         throw new IllegalStateException("Can't instantiate utility only class");
     }
 
-
     /**
      * time: O(N*lgN)
      * space: O(N)
      */
     static String findLongest(String str) {
-        checkNotNull(str);
+        ensure(str != null);
         return findLongestRec(str, 0, str.length() - 1);
     }
 
@@ -30,7 +29,7 @@ final class LongestSubstringWithBalancedParens {
 
         final int rangeSize = to - from + 1;
 
-        assert rangeSize >= 0;
+        ensure(rangeSize >= 0);
 
         if (rangeSize < 2) {
             return "";
@@ -49,8 +48,13 @@ final class LongestSubstringWithBalancedParens {
         final int mid = from + (to - from) / 2;
 
         final String leftSide = findLongestRec(str, from, mid);
+        ensure(leftSide != null);
+
         final String rightSide = findLongestRec(str, mid + 1, to);
+        ensure(rightSide != null);
+
         final String crossSide = findLongestCross(str, mid);
+        ensure(crossSide != null);
 
         return maxLengthString(leftSide, rightSide, crossSide);
     }
@@ -111,8 +115,9 @@ final class LongestSubstringWithBalancedParens {
     }
 
     private static String maxLengthString(String str, String... others) {
-        assert str != null;
-        assert others != null && others.length == 2;
+
+        require(str != null);
+        require(others != null && others.length == 2);
 
         String maxStr = str;
 

@@ -1,14 +1,16 @@
 package com.max.epi.heaps;
 
 
-import org.apache.log4j.Logger;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.apache.log4j.Logger;
+
+import static org.valid4j.Assertive.ensure;
+import static org.valid4j.Assertive.require;
+
 
 /**
  * Print online median.
@@ -34,7 +36,7 @@ public class OnlineMedian {
      * space: O(N)
      */
     private static void printOnlineMedian(int[] arr) {
-        checkNotNull(arr);
+        require(arr != null);
 
         if (arr.length == 0) {
             return;
@@ -73,8 +75,8 @@ public class OnlineMedian {
             minHeap.add(maxHeap.poll());
         }
 
-        assert Math.abs(maxHeap.size() - minHeap.size()) <= 1 : "Unbalanced heaps detected";
-        assert maxHeap.size() <= minHeap.size() : "Incorrect maxHeap (left side) detected";
+        ensure(Math.abs(maxHeap.size() - minHeap.size()) <= 1, "Unbalanced heaps detected");
+        ensure(maxHeap.size() <= minHeap.size(), "Incorrect maxHeap (left side) detected");
     }
 
     private static double calculateMedianFromHeaps(Queue<Integer> maxHeap, Queue<Integer> minHeap) {

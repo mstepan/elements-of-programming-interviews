@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static org.valid4j.Assertive.require;
+
 
 /**
  * 19.7. Transform one string to another.
@@ -35,9 +36,9 @@ final class TransformOneStringToAnother {
     }
 
     static List<String> productionSequence(String s, String t, Set<String> dic) {
-        checkNotNull(s);
-        checkNotNull(t);
-        checkNotNull(dic);
+        require(s != null);
+        require(t != null);
+        require(dic != null);
 
         if (s.length() != t.length() || !dic.contains(s) || !dic.contains(t)) {
             return Collections.emptyList();

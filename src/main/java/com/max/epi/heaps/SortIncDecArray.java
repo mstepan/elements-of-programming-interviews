@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.valid4j.Assertive.ensure;
 
 /**
  * Sort increased-decreased array.
@@ -26,9 +27,7 @@ public class SortIncDecArray {
 
         LOG.info(arr.length);
 
-        if (!Arrays.equals(arr, arr2)) {
-            throw new IllegalStateException("'arr' content is different from 'arr2' content");
-        }
+        ensure(Arrays.equals(arr, arr2), "'arr' content is different from 'arr2' content");
 
         LOG.info("'SortIncDecArray' completed. java-" + System.getProperty("java.version"));
     }
