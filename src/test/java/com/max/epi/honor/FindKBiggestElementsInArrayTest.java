@@ -42,14 +42,19 @@ public class FindKBiggestElementsInArrayTest {
         Random rand = ThreadLocalRandom.current();
 
         for (int it = 0; it < 1000; ++it) {
-            int[] arr = new int[10 + rand.nextInt(1000)];
+            int[] arr = generateRandomArray(10 + rand.nextInt(1000), rand, 1000);
             int[] arrCopy = Arrays.copyOf(arr, arr.length);
 
             int k = rand.nextInt(arr.length);
 
             Arrays.sort(arrCopy);
 
-            assertArrayEquals(Arrays.copyOfRange(arrCopy, arrCopy.length - k, arrCopy.length), findKthBiggest(arr, k));
+            int[] expected = Arrays.copyOfRange(arrCopy, arrCopy.length - k, arrCopy.length);
+            int[] actual = findKthBiggest(arr, k);
+
+            Arrays.sort(actual);
+
+            assertArrayEquals(expected, actual);
         }
     }
 
@@ -72,5 +77,15 @@ public class FindKBiggestElementsInArrayTest {
     private static void assertArrayEquals(int[] expected, int[] actual) {
         assertTrue("Arrays aren't equals, expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
                    Arrays.equals(expected, actual));
+    }
+
+    private static int[] generateRandomArray(int length, Random rand, int maxValue) {
+        int[] arr = new int[length];
+
+        for (int i = 0; i < arr.length; ++i) {
+            arr[i] = rand.nextInt(maxValue);
+        }
+
+        return arr;
     }
 }
