@@ -21,6 +21,7 @@ public class RegexpMatchingTest {
         assertFalse(RegexpMatching.matches("rtyabccczNt7ty", "^abc*z.t"));
         assertFalse(RegexpMatching.matches("abccczNt7ty", "abc*z.t$"));
         assertFalse(RegexpMatching.matches("rtzyactyNt7ty", "a.*z"));
+        assertFalse(RegexpMatching.matches("rtyabcccZNt7ty", "a.*z"));
     }
 
     @Test
@@ -70,16 +71,54 @@ public class RegexpMatchingTest {
         assertFalse(RegexpMatching.matches("abczxyab", "abc$"));
     }
 
+    @Test
+    public void matchEmptyString() {
+
+        assertTrue(RegexpMatching.matches("", "a*"));
+        assertTrue(RegexpMatching.matches("", "a*b*"));
+        assertTrue(RegexpMatching.matches("", "a*.*"));
+        assertTrue(RegexpMatching.matches("", ".*"));
+        assertTrue(RegexpMatching.matches("", ""));
+        assertTrue(RegexpMatching.matches("", "^"));
+        assertTrue(RegexpMatching.matches("", "$"));
+        assertTrue(RegexpMatching.matches("", "^$"));
+        assertTrue(RegexpMatching.matches("", "a*b*"));
+
+        assertFalse(RegexpMatching.matches("", "abc"));
+        assertFalse(RegexpMatching.matches("", "."));
+        assertFalse(RegexpMatching.matches("", "a*c"));
+    }
 
     @Test
     public void incorrectStarPositionThrowsException() {
-
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("'*' appears at the beginning");
 
         RegexpMatching.matches("z45act7", "*c");
-
     }
 
+    @Test
+    public void nullStringThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("'str' can't be null");
+
+        RegexpMatching.matches(null, "*c");
+    }
+
+    @Test
+    public void nullRegexpThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("'regexp' can't be null");
+
+        RegexpMatching.matches("abc", null);
+    }
+
+    @Test
+    public void incorrectRegexpCharacterThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Invalid regexp character detected '-' inside regexp string");
+
+        RegexpMatching.matches("z45act7", "a-c");
+    }
 
 }

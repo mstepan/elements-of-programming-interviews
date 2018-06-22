@@ -29,8 +29,12 @@ final class RegexpMatching {
         checkAllRegexpCharactersValid(regexp);
 
         final Token[] tokens = tokenize(regexp);
-
         final char[] arr = str.toCharArray();
+
+        // empty string match some regexp values like: a*, a*b* or a*.*
+        if (arr.length == 0) {
+            return canMatchEmptyString(tokens);
+        }
 
         // match only from beginning, '^'
         if (tokens[0].type == TokenType.BEGIN) {
@@ -55,6 +59,33 @@ final class RegexpMatching {
         }
 
         return false;
+    }
+
+    private static boolean canMatchEmptyString(Token[] tokens) {
+        if (tokens.length == 0) {
+            return true;
+        }
+
+        int i = 0;
+
+        if (tokens[0].type == TokenType.BEGIN) {
+            ++i;
+        }
+
+        int last = tokens.length - 1;
+
+        if (tokens[tokens.length - 1].type == TokenType.END) {
+            --last;
+        }
+
+        while (i <= last) {
+            if (tokens[i].type != TokenType.STAR) {
+                return false;
+            }
+            ++i;
+        }
+
+        return true;
     }
 
     /**
@@ -92,6 +123,7 @@ final class RegexpMatching {
             return tryMatch(arr, i, tokens, j + 1);
         }
 
+        checkState(false, "You should never reach this line.");
         return false;
     }
 
@@ -188,7 +220,7 @@ final class RegexpMatching {
         return tokens.toArray(new Token[tokens.size()]);
     }
 
-    
+
     private static final class Token {
         final TokenType type;
         final char ch;
