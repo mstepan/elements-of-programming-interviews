@@ -5,6 +5,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -118,5 +120,13 @@ public class AppearsOnceTest {
         findUnique(new int[]{177});
     }
 
+    @Test
+    public void callConstructorThrowsException() throws ReflectiveOperationException {
+        thrown.expect(InvocationTargetException.class);
+
+        Constructor<AppearsOnce> constructor = AppearsOnce.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
 
 }

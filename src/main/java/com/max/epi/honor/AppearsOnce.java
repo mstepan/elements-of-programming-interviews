@@ -49,6 +49,9 @@ final class AppearsOnce {
         int res = 0;
 
         for (int i = 0; i < counter.length; ++i) {
+
+            checkState(counter[i] >= 0, "negative counter[i] detected");
+
             if (counter[i] % mod != 0) {
                 res |= (1 << i);
             }
