@@ -1,12 +1,16 @@
 package com.max.epi.honor;
 
+import com.max.util.ArrayUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.max.epi.honor.SynthesizeExpression.canBeSynthesized;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static com.max.epi.honor.CountInversions.countInversions;
+import static com.max.epi.honor.CountInversions.countInversionsBruteforce;
+import static org.junit.Assert.assertEquals;
 
 public class CountInversionsTest {
 
@@ -14,25 +18,29 @@ public class CountInversionsTest {
     public final ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void canBeSynthesizedNormalFlowSimpleCase() {
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 7));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 123));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 6));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 15));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 5));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 24));
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3}, 36));
+    public void countInversionsNormalFlow() {
+        assertEquals(10, countInversions(new int[]{3, 6, 4, 2, 5, 1}));
     }
 
     @Test
-    public void canBeSynthesizedComplexCase() {
-        assertTrue(canBeSynthesized(new int[]{1, 2, 3, 2, 5, 3, 7, 8, 5, 9}, 995));
+    public void countInversionsRandomArrays() {
+
+        final Random rand = ThreadLocalRandom.current();
+
+        for (int it = 0; it < 100; ++it) {
+            int[] arr = ArrayUtils.generateRandomArray(10 + rand.nextInt(1000));
+
+            assertEquals(countInversionsBruteforce(arr), countInversions(arr));
+        }
+
     }
 
+
     @Test
-    public void canBeSynthesizedSingleDigitArray() {
-        assertTrue(canBeSynthesized(new int[]{3}, 3));
-        assertFalse(canBeSynthesized(new int[]{3}, 2));
-        assertFalse(canBeSynthesized(new int[]{3}, 1));
+    public void countInversionsNullArrayThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("null 'arr' passed");
+
+        countInversions(null);
     }
 }
