@@ -3,24 +3,27 @@ package com.max.epi.hashing;
 
 import org.apache.log4j.Logger;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * 13.13 Test the Collatz conjecture.
+ * 13.13 Test the Collatz conjecture for 1st billion of numbers.
  */
 public final class CollatzConjecture {
 
     private static final Logger LOG = Logger.getLogger(CollatzConjecture.class);
 
     /*
-    Time: 558.2 ms
+    Time: 9865.0 ms
     com.max.epi.hashing.CollatzConjecture  - All OK
      */
     private CollatzConjecture() throws Exception {
 
         final long startTime = System.nanoTime();
 
-        boolean collatzHolds = isCollatzHolds(2_000_000_000);
+        boolean collatzHolds = isCollatzHolds(1_000_000_000);
 
         final double elapsed = (System.nanoTime() - startTime) / 1E6;
 
@@ -46,20 +49,21 @@ public final class CollatzConjecture {
             return true;
         }
 
-        // Bloom filter can be used here instead of ordinary hash table to reduce the space.
-//        Set<Integer> cache = new HashSet<>();
+//        Set<Long> cache = new HashSet<>();
 
         // start from '3' and skip all even numbers, because Collatz conjecture holds for all even values (next = current/2)
         for (int valueToCheck = 3; valueToCheck <= n; valueToCheck += 2) {
 
-            int cur = valueToCheck;
+            long cur = valueToCheck;
             boolean converged = false;
 
             for (int it = 0; it < MAX_ITERATIONS_TO_CHECK_COUNT; ++it) {
 
-                int next = collatzForOddOnly(cur);
+                long next = collatz(cur);
 
-                if (next < valueToCheck /*|| cache.contains(next)*/) {
+                assert next > 0 : "Negative value detected";
+
+                if (next < valueToCheck /*|| cache.contains(next) */) {
                     converged = true;
                     break;
                 }
@@ -74,10 +78,10 @@ public final class CollatzConjecture {
                 return false;
             }
 
-//            cache.remove(valueToCheck);
+//            cache.remove((long)valueToCheck);
         }
 
-//        LOG.info("Cache size: " + cache.size());
+//        LOG.info("cache.size: " + cache.size());
 
         return true;
     }
@@ -85,13 +89,24 @@ public final class CollatzConjecture {
     /**
      * We skill all even number, so we just need to calculate Collatz for odd values.
      */
-    private static int collatzForOddOnly(int val) {
+    private static long collatz(long val) {
 
         assert val > 0 : "Negative or zero value detected for collatz: " + val;
-        assert (val & 1) != 0 : "Not and odd number passed: " + val;
 
-        // odd case: next = val/2
-        return val >> 1;
+        //even case
+        if ((val & 1) == 0) {
+            return val >> 1L;
+        }
+        else {
+            long next = 3L * val + 1L;
+
+            if (next < val) {
+                throw new ArithmeticException("Overflow detected for val: " + val + ", next: " + next);
+            }
+
+            // odd case: next = 3*val + 1
+            return next;
+        }
     }
 
     public static void main(String[] args) {
