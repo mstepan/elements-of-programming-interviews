@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.Random;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -28,7 +29,8 @@ public final class InterleavingOfStringsTest {
             String s1 = StringUtils.generateLowCaseAsciiString(10 + rand.nextInt(1000));
             String s2 = StringUtils.generateLowCaseAsciiString(10 + rand.nextInt(1000));
             String base = StringUtils.combineInRandomOrder(s1, s2);
-            assertTrue(InterleavingOfStrings.isInterleaving(base, s1, s2));
+
+            assertThat(InterleavingOfStrings.isInterleaving(base, s1, s2)).isTrue();
         }
     }
 

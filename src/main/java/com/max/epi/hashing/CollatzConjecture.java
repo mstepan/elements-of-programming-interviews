@@ -3,9 +3,6 @@ package com.max.epi.hashing;
 
 import org.apache.log4j.Logger;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
@@ -93,18 +90,17 @@ public final class CollatzConjecture {
 
         assert val > 0 : "Negative or zero value detected for collatz: " + val;
 
-        //even case
+        //even case, next = val/2
         if ((val & 1) == 0) {
-            return val >> 1L;
+            return val >> 1;
         }
+
+        // odd case: next = 3*val + 1
         else {
             long next = 3L * val + 1L;
 
-            if (next < val) {
-                throw new ArithmeticException("Overflow detected for val: " + val + ", next: " + next);
-            }
+            assert next > val : "Overflow detected for val: " + val + ", next: " + next;
 
-            // odd case: next = 3*val + 1
             return next;
         }
     }

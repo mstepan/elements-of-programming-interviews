@@ -2,14 +2,15 @@ package com.max.epi.dynamic;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static groovy.util.GroovyTestCase.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class CountWaysToTraverse2DArrayTest {
 
     @Test
     public void countWays() {
-        assertEquals(6, CountWaysToTraverse2DArray.countWays(3));
+        assertThat(CountWaysToTraverse2DArray.countWays(3)).isEqualTo(6);
         assertEquals(20, CountWaysToTraverse2DArray.countWays(4));
         assertEquals(70, CountWaysToTraverse2DArray.countWays(5));
         assertEquals(252, CountWaysToTraverse2DArray.countWays(6));
@@ -19,7 +20,7 @@ public class CountWaysToTraverse2DArrayTest {
     public void countWaysBiggerSize() {
         for (int size = 7; size < 15; ++size) {
             assertEquals(CountWaysToTraverse2DArray.countWaysBruteforce(size),
-                    CountWaysToTraverse2DArray.countWays(size));
+                         CountWaysToTraverse2DArray.countWays(size));
         }
     }
 

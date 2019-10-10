@@ -1,16 +1,14 @@
 package com.max.epi.array;
 
-
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public final class AddBinaryStringsTest {
 
     @Test
     public void addBinaryStrings() {
-        assertEquals("10011", AddBinaryStrings.addBinaryStrings("0110", "1101"));
+        assertThat(AddBinaryStrings.addBinaryStrings("0110", "1101")).isEqualTo("10011");
     }
 
 }
