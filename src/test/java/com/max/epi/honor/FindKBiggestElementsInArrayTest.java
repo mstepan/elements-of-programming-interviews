@@ -1,39 +1,40 @@
 package com.max.epi.honor;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.max.epi.honor.FindKBiggestElementsInArray.findKthBiggest;
-import static org.junit.Assert.assertTrue;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class FindKBiggestElementsInArrayTest {
+import static com.max.epi.honor.FindKBiggestElementsInArray.findKthBiggest;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
+public final class FindKBiggestElementsInArrayTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void findKthBiggestNormalFlow() {
-        assertArrayEquals(new int[]{14, 34, 56}, findKthBiggest(new int[]{3, 5, 7, 2, 12, 34, 56, 8, 9, 13, 14}, 3));
+        assertThat(findKthBiggest(new int[]{3, 5, 7, 2, 12, 34, 56, 8, 9, 13, 14}, 3)).isEqualTo(new int[]{14, 34, 56});
     }
 
     @Test
     public void findKthBiggestKBiggerThanArrayLength() {
-        assertArrayEquals(new int[]{9, 13, 14}, findKthBiggest(new int[]{9, 13, 14}, 10));
+        assertThat(findKthBiggest(new int[]{9, 13, 14}, 10)).isEqualTo(new int[]{9, 13, 14});
     }
 
     @Test
     public void findKthBiggestKEqualsArrayLength() {
-        assertArrayEquals(new int[]{9, 13, 14}, findKthBiggest(new int[]{9, 13, 14}, 3));
+        assertThat(findKthBiggest(new int[]{9, 13, 14}, 3)).isEqualTo(new int[]{9, 13, 14});
     }
 
     @Test
     public void findKthBiggestZeroKPassed() {
-        assertArrayEquals(new int[]{}, findKthBiggest(new int[]{9, 13, 14}, 0));
+        assertThat(findKthBiggest(new int[]{9, 13, 14}, 0)).isEqualTo(new int[]{});
     }
 
     @Test
@@ -54,7 +55,7 @@ public class FindKBiggestElementsInArrayTest {
 
             Arrays.sort(actual);
 
-            assertArrayEquals(expected, actual);
+            assertThat(actual).isEqualTo(expected);
         }
     }
 
@@ -72,11 +73,6 @@ public class FindKBiggestElementsInArrayTest {
         thrown.expectMessage("negative 'k' passed");
 
         findKthBiggest(new int[]{10, 8, 3}, -3);
-    }
-
-    private static void assertArrayEquals(int[] expected, int[] actual) {
-        assertTrue("Arrays aren't equals, expected: " + Arrays.toString(expected) + ", actual: " + Arrays.toString(actual),
-                   Arrays.equals(expected, actual));
     }
 
     private static int[] generateRandomArray(int length, Random rand, int maxValue) {

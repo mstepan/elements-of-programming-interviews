@@ -1,25 +1,21 @@
 package com.max.epi.honor;
 
+import com.max.util.ArrayUtils;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Random;
 
-import com.max.util.ArrayUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import static com.max.epi.honor.SearchInTwoSortedArrays.findOrderStat;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class SearchInTwoSortedArraysTest {
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
+public final class SearchInTwoSortedArraysTest {
 
     @Test
     public void findOrderStatNormalFlowRandomArrays() {
 
-        Random rand = new Random();
+        final Random rand = new Random();
 
         for (int it = 0; it < 100; ++it) {
             int[] arr1 = ArrayUtils.generateRandomArray(10 + rand.nextInt(1000));
@@ -31,7 +27,7 @@ public class SearchInTwoSortedArraysTest {
             int[] mergedArr = mergeSortedArrays(arr1, arr2);
 
             for (int i = 0; i < mergedArr.length; ++i) {
-                assertEquals(mergedArr[i], findOrderStat(arr1, arr2, i + 1));
+                assertThat(findOrderStat(arr1, arr2, i + 1)).isEqualTo(mergedArr[i]);
             }
         }
     }
@@ -64,68 +60,60 @@ public class SearchInTwoSortedArraysTest {
         int[] arr1 = {1, 2, 5, 12, 24, 27, 34, 38};
         int[] arr2 = {4, 8, 8, 12, 29, 33};
 
-        assertEquals(1, findOrderStat(arr1, arr2, 1));
-        assertEquals(2, findOrderStat(arr1, arr2, 2));
-        assertEquals(4, findOrderStat(arr1, arr2, 3));
-        assertEquals(5, findOrderStat(arr1, arr2, 4));
-        assertEquals(8, findOrderStat(arr1, arr2, 5));
-        assertEquals(8, findOrderStat(arr1, arr2, 6));
-        assertEquals(12, findOrderStat(arr1, arr2, 7));
-        assertEquals(12, findOrderStat(arr1, arr2, 8));
+        assertThat(findOrderStat(arr1, arr2, 1)).isEqualTo(1);
+        assertThat(findOrderStat(arr1, arr2, 2)).isEqualTo(2);
+        assertThat(findOrderStat(arr1, arr2, 3)).isEqualTo(4);
+        assertThat(findOrderStat(arr1, arr2, 4)).isEqualTo(5);
+        assertThat(findOrderStat(arr1, arr2, 5)).isEqualTo(8);
+        assertThat(findOrderStat(arr1, arr2, 6)).isEqualTo(8);
+        assertThat(findOrderStat(arr1, arr2, 7)).isEqualTo(12);
+        assertThat(findOrderStat(arr1, arr2, 8)).isEqualTo(12);
 
-        assertEquals(24, findOrderStat(arr1, arr2, 9));
-        assertEquals(27, findOrderStat(arr1, arr2, 10));
-        assertEquals(29, findOrderStat(arr1, arr2, 11));
-        assertEquals(33, findOrderStat(arr1, arr2, 12));
-        assertEquals(34, findOrderStat(arr1, arr2, 13));
-        assertEquals(38, findOrderStat(arr1, arr2, 14));
+        assertThat(findOrderStat(arr1, arr2, 9)).isEqualTo(24);
+        assertThat(findOrderStat(arr1, arr2, 10)).isEqualTo(27);
+        assertThat(findOrderStat(arr1, arr2, 11)).isEqualTo(29);
+        assertThat(findOrderStat(arr1, arr2, 12)).isEqualTo(33);
+        assertThat(findOrderStat(arr1, arr2, 13)).isEqualTo(34);
+        assertThat(findOrderStat(arr1, arr2, 14)).isEqualTo(38);
     }
 
     @Test
     public void findOrderStatKBiggerThanLengthThowsException() {
+        final int[] arr1 = {1, 2, 5};
+        final int[] arr2 = {4, 12};
 
-        int[] arr1 = {1, 2, 5};
-        int[] arr2 = {4, 12};
-
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("k = 10, should be in range [1;5]");
-
-        findOrderStat(arr1, arr2, 10);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findOrderStat(arr1, arr2, 10)).
+                withMessage("k = 10, should be in range [1;5]");
     }
 
     @Test
     public void findOrderStatKOneBiggerThowsException() {
+        final int[] arr1 = {1, 2, 5};
+        final int[] arr2 = {4, 12};
 
-        int[] arr1 = {1, 2, 5};
-        int[] arr2 = {4, 12};
-
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("k = 6, should be in range [1;5]");
-
-        findOrderStat(arr1, arr2, 6);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findOrderStat(arr1, arr2, 6)).
+                withMessage("k = 6, should be in range [1;5]");
     }
 
     @Test
     public void findOrderStatKZeroThrowsException() {
+        final int[] arr1 = {1, 2, 5};
+        final int[] arr2 = {4, 12};
 
-        int[] arr1 = {1, 2, 5};
-        int[] arr2 = {4, 12};
-
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("k = 0, should be in range [1;5]");
-
-        findOrderStat(arr1, arr2, 0);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findOrderStat(arr1, arr2, 0)).
+                withMessage("k = 0, should be in range [1;5]");
     }
 
     @Test
     public void findOrderStatKNegativeThrowsException() {
+        final int[] arr1 = {1, 2, 5};
+        final int[] arr2 = {4, 12};
 
-        int[] arr1 = {1, 2, 5};
-        int[] arr2 = {4, 12};
-
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("k = -1, should be in range [1;5]");
-
-        findOrderStat(arr1, arr2, -1);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findOrderStat(arr1, arr2, -1)).
+                withMessage("k = -1, should be in range [1;5]");
     }
 }

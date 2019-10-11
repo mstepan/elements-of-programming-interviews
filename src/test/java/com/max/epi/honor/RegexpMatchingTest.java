@@ -1,124 +1,116 @@
 package com.max.epi.honor;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class RegexpMatchingTest {
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
+public final class RegexpMatchingTest {
 
     @Test
     public void matchingComplexRegexp() {
-        assertTrue(RegexpMatching.matches("rtyabccczNt7ty", "abc*z.t"));
-        assertTrue(RegexpMatching.matches("rtyazNt7ty", "a.*z"));
-        assertTrue(RegexpMatching.matches("rtyabccczNt7ty", "a.*z"));
 
-        assertFalse(RegexpMatching.matches("rtyabccczNt7ty", "^abc*z.t"));
-        assertFalse(RegexpMatching.matches("abccczNt7ty", "abc*z.t$"));
-        assertFalse(RegexpMatching.matches("rtzyactyNt7ty", "a.*z"));
-        assertFalse(RegexpMatching.matches("rtyabcccZNt7ty", "a.*z"));
+        assertThat(RegexpMatching.matches("rtyabccczNt7ty", "abc*z.t")).isTrue();
+        assertThat(RegexpMatching.matches("rtyazNt7ty", "a.*z")).isTrue();
+        assertThat(RegexpMatching.matches("rtyabccczNt7ty", "a.*z")).isTrue();
+
+        assertThat(RegexpMatching.matches("rtyabccczNt7ty", "^abc*z.t")).isFalse();
+        assertThat(RegexpMatching.matches("abccczNt7ty", "abc*z.t$")).isFalse();
+        assertThat(RegexpMatching.matches("rtzyactyNt7ty", "a.*z")).isFalse();
+        assertThat(RegexpMatching.matches("rtyabcccZNt7ty", "a.*z")).isFalse();
     }
 
     @Test
     public void matchingAlphanumeric() {
-        assertTrue(RegexpMatching.matches("abc", "abc"));
-        assertTrue(RegexpMatching.matches("z45abc", "abc"));
-        assertTrue(RegexpMatching.matches("abcz45", "abc"));
-        assertTrue(RegexpMatching.matches("z45abcdt7", "abc"));
+        assertThat(RegexpMatching.matches("abc", "abc")).isTrue();
+        assertThat(RegexpMatching.matches("z45abc", "abc")).isTrue();
+        assertThat(RegexpMatching.matches("abcz45", "abc")).isTrue();
+        assertThat(RegexpMatching.matches("z45abcdt7", "abc")).isTrue();
 
-        assertFalse(RegexpMatching.matches("z45abdct7", "abc"));
+        assertThat(RegexpMatching.matches("z45abdct7", "abc")).isFalse();
     }
 
     @Test
     public void matchingWithDot() {
-        assertTrue(RegexpMatching.matches("z45abdct7", "ab.c"));
-        assertTrue(RegexpMatching.matches("z45abd76ct7", "ab...c"));
-        assertTrue(RegexpMatching.matches("tta9bc8xyz", "a.bc.xy"));
+        assertThat(RegexpMatching.matches("z45abdct7", "ab.c")).isTrue();
+        assertThat(RegexpMatching.matches("z45abd76ct7", "ab...c")).isTrue();
+        assertThat(RegexpMatching.matches("tta9bc8xyz", "a.bc.xy")).isTrue();
 
-        assertFalse(RegexpMatching.matches("z45abd76ct7", "ab.c"));
-        assertFalse(RegexpMatching.matches("z45abd76ct7", "ab..c"));
+        assertThat(RegexpMatching.matches("z45abd76ct7", "ab.c")).isFalse();
+        assertThat(RegexpMatching.matches("z45abd76ct7", "ab..c")).isFalse();
     }
 
     @Test
     public void matchingWithStar() {
-        assertTrue(RegexpMatching.matches("z45abbbct7", "ab*c"));
-        assertTrue(RegexpMatching.matches("z45abbbct7", "ab*c"));
-        assertTrue(RegexpMatching.matches("z45abbbbbbct7", "ab*c"));
-        assertTrue(RegexpMatching.matches("z45act7", "ab*c"));
-        assertTrue(RegexpMatching.matches("z45act7", "ab*"));
+        assertThat(RegexpMatching.matches("z45abbbct7", "ab*c")).isTrue();
+        assertThat(RegexpMatching.matches("z45abbbct7", "ab*c")).isTrue();
+        assertThat(RegexpMatching.matches("z45abbbbbbct7", "ab*c")).isTrue();
+        assertThat(RegexpMatching.matches("z45act7", "ab*c")).isTrue();
+        assertThat(RegexpMatching.matches("z45act7", "ab*")).isTrue();
 
-        assertFalse(RegexpMatching.matches("z45act7", "a*b"));
+        assertThat(RegexpMatching.matches("z45act7", "a*b")).isFalse();
     }
 
     @Test
     public void matchFromBeginning() {
-        assertTrue(RegexpMatching.matches("abct7", "^abc"));
+        assertThat(RegexpMatching.matches("abct7", "^abc")).isTrue();
 
-        assertFalse(RegexpMatching.matches("zxyabct7", "^abc"));
-        assertFalse(RegexpMatching.matches("zxyabc", "^abc"));
+        assertThat(RegexpMatching.matches("zxyabct7", "^abc")).isFalse();
+        assertThat(RegexpMatching.matches("zxyabc", "^abc")).isFalse();
     }
 
     @Test
     public void matchFromEnd() {
-        assertTrue(RegexpMatching.matches("t78abc", "abc$"));
+        assertThat(RegexpMatching.matches("t78abc", "abc$")).isTrue();
 
-        assertFalse(RegexpMatching.matches("zxyabct7", "abc$"));
-        assertFalse(RegexpMatching.matches("abczxyab", "abc$"));
+        assertThat(RegexpMatching.matches("zxyabct7", "abc$")).isFalse();
+        assertThat(RegexpMatching.matches("abczxyab", "abc$")).isFalse();
     }
 
     @Test
     public void matchEmptyString() {
+        assertThat(RegexpMatching.matches("", "a*")).isTrue();
+        assertThat(RegexpMatching.matches("", "a*b*")).isTrue();
+        assertThat(RegexpMatching.matches("", "a*.*")).isTrue();
+        assertThat(RegexpMatching.matches("", ".*")).isTrue();
+        assertThat(RegexpMatching.matches("", "")).isTrue();
+        assertThat(RegexpMatching.matches("", "^")).isTrue();
+        assertThat(RegexpMatching.matches("", "$")).isTrue();
+        assertThat(RegexpMatching.matches("", "^$")).isTrue();
+        assertThat(RegexpMatching.matches("", "a*b*")).isTrue();
 
-        assertTrue(RegexpMatching.matches("", "a*"));
-        assertTrue(RegexpMatching.matches("", "a*b*"));
-        assertTrue(RegexpMatching.matches("", "a*.*"));
-        assertTrue(RegexpMatching.matches("", ".*"));
-        assertTrue(RegexpMatching.matches("", ""));
-        assertTrue(RegexpMatching.matches("", "^"));
-        assertTrue(RegexpMatching.matches("", "$"));
-        assertTrue(RegexpMatching.matches("", "^$"));
-        assertTrue(RegexpMatching.matches("", "a*b*"));
-
-        assertFalse(RegexpMatching.matches("", "abc"));
-        assertFalse(RegexpMatching.matches("", "."));
-        assertFalse(RegexpMatching.matches("", "a*c"));
+        assertThat(RegexpMatching.matches("", "abc")).isFalse();
+        assertThat(RegexpMatching.matches("", ".")).isFalse();
+        assertThat(RegexpMatching.matches("", "a*c")).isFalse();
     }
 
     @Test
     public void incorrectStarPositionThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("'*' appears at the beginning");
-
-        RegexpMatching.matches("z45act7", "*c");
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> RegexpMatching.matches("z45act7", "*c")).
+                withMessage("'*' appears at the beginning");
     }
 
+    @SuppressWarnings("all")
     @Test
     public void nullStringThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("'str' can't be null");
-
-        RegexpMatching.matches(null, "*c");
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> RegexpMatching.matches(null, "*c")).
+                withMessage("'str' can't be null");
     }
 
     @Test
     public void nullRegexpThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("'regexp' can't be null");
-
-        RegexpMatching.matches("abc", null);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> RegexpMatching.matches("abc", null)).
+                withMessage("'regexp' can't be null");
     }
 
     @Test
     public void incorrectRegexpCharacterThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Invalid regexp character detected '-' inside regexp string");
-
-        RegexpMatching.matches("z45act7", "a-c");
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> RegexpMatching.matches("z45act7", "a-c")).
+                withMessage("Invalid regexp character detected '-' inside regexp string 'a-c'");
     }
 
 }

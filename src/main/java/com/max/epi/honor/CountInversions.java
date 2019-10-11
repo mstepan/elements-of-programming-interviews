@@ -14,14 +14,16 @@ final class CountInversions {
         throw new IllegalStateException("Can't instantiate utility only class");
     }
 
-
     /**
      * time: O(N*lgN)
      * space: O(lg N)
      */
     static int countInversions(int[] arr) {
         checkArgument(arr != null, "null 'arr' passed");
-        return countInvRec(arr, 0, arr.length - 1);
+
+        final int[] arrCopy = Arrays.copyOf(arr, arr.length);
+
+        return countInvRec(arrCopy, 0, arrCopy.length - 1);
     }
 
     private static int countInvRec(int[] arr, int from, int to) {

@@ -1,21 +1,18 @@
 package com.max.epi.honor;
 
 import com.max.util.ArrayUtils;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.max.epi.honor.CountInversions.countInversions;
 import static com.max.epi.honor.CountInversions.countInversionsBruteforce;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.Assert.assertEquals;
 
-public class CountInversionsTest {
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
+public final class CountInversionsTest {
 
     @Test
     public void countInversionsNormalFlow() {
@@ -28,19 +25,16 @@ public class CountInversionsTest {
         final Random rand = ThreadLocalRandom.current();
 
         for (int it = 0; it < 100; ++it) {
-            int[] arr = ArrayUtils.generateRandomArray(10 + rand.nextInt(1000));
-
-            assertEquals(countInversionsBruteforce(arr), countInversions(arr));
+            final int[] arr = ArrayUtils.generateRandomArray(10 + rand.nextInt(1000));
+            assertThat(countInversions(arr)).isEqualTo(countInversionsBruteforce(arr));
         }
-
     }
 
 
     @Test
     public void countInversionsNullArrayThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("null 'arr' passed");
-
-        countInversions(null);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> countInversions(null))
+                .withMessage("null 'arr' passed");
     }
 }

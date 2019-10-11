@@ -2,17 +2,16 @@ package com.max.epi.honor;
 
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class LongestSubstringWithBalancedParensTest {
+public final class LongestSubstringWithBalancedParensTest {
 
     @Test
     public void findLongest() {
-        assertEquals("(())()", LongestSubstringWithBalancedParens.findLongest("((())()(()("));
-
-        assertEquals("()", LongestSubstringWithBalancedParens.findLongest("((()"));
-        assertEquals("()()", LongestSubstringWithBalancedParens.findLongest(")()())"));
-        assertEquals("()(())", LongestSubstringWithBalancedParens.findLongest("()(()))))"));
-        assertEquals("", LongestSubstringWithBalancedParens.findLongest("))(("));
+        assertThat(LongestSubstringWithBalancedParens.findLongest("((())()(()(")).isEqualTo("(())()");
+        assertThat(LongestSubstringWithBalancedParens.findLongest("((()")).isEqualTo("()");
+        assertThat(LongestSubstringWithBalancedParens.findLongest(")()())")).isEqualTo("()()");
+        assertThat(LongestSubstringWithBalancedParens.findLongest("()(()))))")).isEqualTo("()(())");
+        assertThat(LongestSubstringWithBalancedParens.findLongest("))((")).isEqualTo("");
     }
 }

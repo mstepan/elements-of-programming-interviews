@@ -1,9 +1,7 @@
 package com.max.epi.honor;
 
 import com.max.util.ArrayUtils;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,21 +11,20 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.max.epi.honor.AppearsOnce.findUnique;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class AppearsOnceTest {
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
+public final class AppearsOnceTest {
 
     @Test
     public void findUniqueNormalFlow() {
-        assertEquals(4, findUnique(new int[]{2, 4, 2, 5, 2, 5, 5}));
-        assertEquals(3, findUnique(new int[]{1, 1, 1, 2, 2, 2, 3, 4, 4, 4}));
-        assertEquals(-4, findUnique(new int[]{-2, -4, -2, -5, -2, -5, -5}));
-        assertEquals(-4, findUnique(new int[]{2, -4, 2, 5, 2, 5, 5}));
-        assertEquals(0, findUnique(new int[]{2, 0, 2, 5, 2, 5, 5}));
-        assertEquals(2, findUnique(new int[]{0, 0, 2, 5, 0, 5, 5}));
+        assertThat(findUnique(new int[]{2, 4, 2, 5, 2, 5, 5})).isEqualTo(4);
+        assertThat(findUnique(new int[]{1, 1, 1, 2, 2, 2, 3, 4, 4, 4})).isEqualTo(3);
+        assertThat(findUnique(new int[]{-2, -4, -2, -5, -2, -5, -5})).isEqualTo(-4);
+        assertThat(findUnique(new int[]{2, -4, 2, 5, 2, 5, 5})).isEqualTo(-4);
+        assertThat(findUnique(new int[]{2, 0, 2, 5, 2, 5, 5})).isEqualTo(0);
+        assertThat(findUnique(new int[]{0, 0, 2, 5, 0, 5, 5})).isEqualTo(2);
     }
 
     @Test
@@ -68,65 +65,60 @@ public class AppearsOnceTest {
 
             ArrayUtils.randomShuffle(arr);
 
-            assertEquals(uniqueValue, findUnique(arr));
+            assertThat(findUnique(arr)).isEqualTo(uniqueValue);
         }
     }
 
+    @SuppressWarnings("all")
     @Test
     public void findUniqueNullArrayThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("null array passed");
-
-        findUnique(null);
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(null)).
+                withMessage("null array passed");
     }
 
     @Test
     public void findUniqueEmptyArrayThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("incorrect array length detected");
-
-        findUnique(new int[]{});
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(new int[]{})).
+                withMessage("incorrect array length detected");
     }
 
     @Test
     public void findUniqueIncorrectArrayLength1ThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("incorrect array length detected");
-
-        findUnique(new int[]{3, 3, 3});
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(new int[]{3, 3, 3})).
+                withMessage("incorrect array length detected");
     }
 
     @Test
     public void findUniqueIncorrectArrayLength2ThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("incorrect array length detected");
-
-        findUnique(new int[]{3, 3, 3, 5, 5});
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(new int[]{3, 3, 3, 5, 5})).
+                withMessage("incorrect array length detected");
     }
 
     @Test
     public void findUniqueIncorrectArrayLength3ThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("incorrect array length detected");
-
-        findUnique(new int[]{3, 3, 3, 5, 5, 5});
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(new int[]{3, 3, 3, 5, 5, 5})).
+                withMessage("incorrect array length detected");
     }
 
     @Test
     public void findUniqueIncorrectArrayLength4ThrowsException() {
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("incorrect array length detected");
-
-        findUnique(new int[]{177});
+        assertThatIllegalArgumentException().
+                isThrownBy(() -> findUnique(new int[]{177})).
+                withMessage("incorrect array length detected");
     }
 
     @Test
     public void callConstructorThrowsException() throws ReflectiveOperationException {
-        thrown.expect(InvocationTargetException.class);
-
         Constructor<AppearsOnce> constructor = AppearsOnce.class.getDeclaredConstructor();
         constructor.setAccessible(true);
-        constructor.newInstance();
+
+        assertThatExceptionOfType(InvocationTargetException.class).
+                isThrownBy(constructor::newInstance);
     }
 
 }
