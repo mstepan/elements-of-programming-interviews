@@ -14,6 +14,7 @@ import static com.max.epi.honor.AppearsOnce.findUnique;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.Assert.assertEquals;
 
 public final class AppearsOnceTest {
 
