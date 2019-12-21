@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ final class TransformOneStringToAnother {
         checkNotNull(s);
         checkNotNull(t);
         checkNotNull(dic);
+        checkAllStringsHaveSameLength(dic);
 
         if (s.length() != t.length() || !dic.contains(s) || !dic.contains(t)) {
             return Collections.emptyList();
@@ -71,6 +73,22 @@ final class TransformOneStringToAnother {
         }
 
         return Collections.emptyList();
+    }
+
+    private static void checkAllStringsHaveSameLength(Set<String> dic) {
+        if (dic.isEmpty()) {
+            return;
+        }
+
+        Iterator<String> it = dic.iterator();
+
+        final int length = it.next().length();
+
+        while(it.hasNext() ){
+            if( it.next().length() != length ){
+                throw new IllegalStateException("Not all strings have same length.");
+            }
+        }
     }
 
     private static Map<String, List<String>> buildGraph(Set<String> dic) {

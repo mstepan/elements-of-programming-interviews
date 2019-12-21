@@ -1,21 +1,15 @@
 package com.max.epi.graph;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TransformOneStringToAnotherTest {
-
-    @Rule
-    public final ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void productionSequence() {
@@ -30,12 +24,11 @@ public class TransformOneStringToAnotherTest {
 
         List<String> seq = TransformOneStringToAnother.productionSequence("cat", "dog", dic);
 
-        assertEquals(Arrays.asList("cat", "cot", "dot", "dog"), seq);
+        assertThat(seq).containsExactly("cat", "cot", "dot", "dog");
     }
 
     @Test
     public void productionSequenceSameString() {
-
         Set<String> dic = new HashSet<>();
         dic.add("bat");
         dic.add("cot");
@@ -46,23 +39,7 @@ public class TransformOneStringToAnotherTest {
 
         List<String> seq = TransformOneStringToAnother.productionSequence("cat", "cat", dic);
 
-        assertEquals(Arrays.asList("cat"), seq);
-    }
-
-    @Test
-    public void productionSequenceNotSameLengthStrings() {
-
-        Set<String> dic = new HashSet<>();
-        dic.add("bat");
-        dic.add("cot");
-        dic.add("dogs");
-        dic.add("dag");
-        dic.add("dot");
-        dic.add("cat");
-
-        List<String> seq = TransformOneStringToAnother.productionSequence("cat", "dogs", dic);
-
-        assertEquals(Collections.emptyList(), seq);
+        assertThat(seq).containsExactly("cat");
     }
 
     @Test
@@ -77,7 +54,7 @@ public class TransformOneStringToAnotherTest {
 
         List<String> seq = TransformOneStringToAnother.productionSequence("cat", "dog", dic);
 
-        assertEquals(Collections.emptyList(), seq);
+        assertThat(seq).isEmpty();
     }
 
     @Test
@@ -92,7 +69,7 @@ public class TransformOneStringToAnotherTest {
 
         List<String> seq = TransformOneStringToAnother.productionSequence("cat", "dog", dic);
 
-        assertEquals(Collections.emptyList(), seq);
+        assertThat(seq).isEmpty();
     }
 
     @Test
@@ -111,24 +88,40 @@ public class TransformOneStringToAnotherTest {
 
         List<String> seq = TransformOneStringToAnother.productionSequence("cat", "dam", dic);
 
-        assertEquals(Collections.emptyList(), seq);
+        assertThat(seq).isEmpty();
+    }
+
+    @Test
+    public void productionSequenceNotSameLengthThrowsException() {
+
+        Set<String> dic = new HashSet<>();
+        dic.add("bat");
+        dic.add("cot");
+        dic.add("dogs");
+        dic.add("dag");
+        dic.add("dot");
+        dic.add("cat");
+
+        assertThatThrownBy(() -> TransformOneStringToAnother.productionSequence("cat", "dogs", dic)).
+                isInstanceOf(IllegalStateException.class)
+                .hasMessage("Not all strings have same length.");
     }
 
     @Test
     public void productionSequenceNullFirstString() {
-        expectedException.expect(NullPointerException.class);
-        TransformOneStringToAnother.productionSequence(null, "dog", new HashSet<>());
+        assertThatThrownBy(() -> TransformOneStringToAnother.productionSequence(null, "dog", new HashSet<>())).
+                isInstanceOf(NullPointerException.class);
     }
 
     @Test
     public void productionSequenceNullSecondString() {
-        expectedException.expect(NullPointerException.class);
-        TransformOneStringToAnother.productionSequence("cat", null, new HashSet<>());
+        assertThatThrownBy(() -> TransformOneStringToAnother.productionSequence("cat", null, new HashSet<>())).
+                isInstanceOf(NullPointerException.class);
     }
 
     @Test
     public void productionSequenceNullDictionary() {
-        expectedException.expect(NullPointerException.class);
-        TransformOneStringToAnother.productionSequence("cat", "dog", null);
+        assertThatThrownBy(() -> TransformOneStringToAnother.productionSequence("cat", "dog", null)).
+                isInstanceOf(NullPointerException.class);
     }
 }

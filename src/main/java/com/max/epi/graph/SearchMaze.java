@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * 19.1. Search the maze.
  * <p>
- * Given a 2D array of entries finr the path between start and end entries.
+ * Given a 2D array of entries find the path between start and end entries.
  * <p>
  * <p>
  * time: O(N^2)
