@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 final class UndirectedGraph {
 
@@ -18,6 +19,10 @@ final class UndirectedGraph {
 
     List<String> adjacent(String vertex) {
         return edges.get(vertex);
+    }
+
+    Set<String> allVertixes(){
+        return edges.keySet();
     }
 
     private void addEdgeSafely(String src, String dest) {

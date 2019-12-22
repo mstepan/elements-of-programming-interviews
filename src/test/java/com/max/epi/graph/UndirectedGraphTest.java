@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UndirectedGraphTest {
 
     @Test
-    public void addEdgesAndCheckAdjacent() {
+    public void checkAdjacent() {
         UndirectedGraph g = new UndirectedGraph();
 
         // 1-st connected component
@@ -28,5 +28,22 @@ public class UndirectedGraphTest {
         assertThat(g.adjacent("E")).contains("F", "G");
         assertThat(g.adjacent("F")).contains("E");
         assertThat(g.adjacent("G")).contains("E");
+    }
+
+    @Test
+    public void allVertexes() {
+        UndirectedGraph g = new UndirectedGraph();
+
+        // 1-st connected component
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("C", "D");
+        g.addEdge("B", "D");
+
+        // 2-nd connected component
+        g.addEdge("E", "F");
+        g.addEdge("E", "G");
+
+        assertThat(g.allVertixes()).containsExactlyInAnyOrder("A", "B", "C", "D", "E", "F", "G");
     }
 }
