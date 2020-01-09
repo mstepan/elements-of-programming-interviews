@@ -1,6 +1,7 @@
 package com.max.epi.primitive;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 
@@ -13,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class SwapBitsInWord {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int LSB_INDEX_INT = 0;
     private static final int MSB_INDEX_INT = Integer.SIZE - 1;
@@ -39,12 +40,12 @@ public class SwapBitsInWord {
      */
     public static int swapBits(int value, int i, int j) {
         checkArgument(i >= LSB_INDEX_INT && i <= MSB_INDEX_INT,
-                "Parameter 'i' is out of correct boundary, expected [%s, %s), actual = %s",
-                LSB_INDEX_INT, MSB_INDEX_INT, i);
+                      "Parameter 'i' is out of correct boundary, expected [%s, %s), actual = %s",
+                      LSB_INDEX_INT, MSB_INDEX_INT, i);
 
         checkArgument(j >= LSB_INDEX_INT && j <= MSB_INDEX_INT,
-                "Parameter 'j' is out of correct boundary, expected [%s, %s), actual = %s",
-                LSB_INDEX_INT, MSB_INDEX_INT, j);
+                      "Parameter 'j' is out of correct boundary, expected [%s, %s), actual = %s",
+                      LSB_INDEX_INT, MSB_INDEX_INT, j);
 
         // bit indexes to swap are the same
         if (i == j) {

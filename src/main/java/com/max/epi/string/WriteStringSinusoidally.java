@@ -1,13 +1,16 @@
 package com.max.epi.string;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class WriteStringSinusoidally {
 
-    private static final Logger LOG = Logger.getLogger(WriteStringSinusoidally.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private WriteStringSinusoidally() throws Exception {
 

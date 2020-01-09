@@ -1,8 +1,10 @@
 package com.max.epi.string.matching;
 
 import com.max.util.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -10,7 +12,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class KMPStringMatching {
 
-    private static final Logger LOG = Logger.getLogger(KMPStringMatching.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private KMPStringMatching() throws Exception {
 

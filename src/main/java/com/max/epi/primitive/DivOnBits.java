@@ -1,6 +1,7 @@
 package com.max.epi.primitive;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
  */
 public class DivOnBits {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int SIGN_BIT = Integer.SIZE - 1;
 
@@ -30,7 +31,7 @@ public class DivOnBits {
 
             if (expectedSum != actualSum) {
                 throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
-                        ", for x = " + x + " and y = " + y);
+                                                        ", for x = " + x + " and y = " + y);
             }
         }
 

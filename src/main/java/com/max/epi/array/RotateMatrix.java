@@ -1,10 +1,13 @@
 package com.max.epi.array;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 public class RotateMatrix {
 
-    private static final Logger LOG = Logger.getLogger(RotateMatrix.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private RotateMatrix() throws Exception {
 

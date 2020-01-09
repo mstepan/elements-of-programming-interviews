@@ -1,14 +1,17 @@
 package com.max.epi.searching;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class MissedAndDuplicateMain {
 
-    private static final Logger LOG = Logger.getLogger(MissedAndDuplicateMain.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private MissedAndDuplicateMain() throws Exception {
 
@@ -37,7 +40,7 @@ public final class MissedAndDuplicateMain {
         for (int i = 0; i < arr.length; ++i) {
 
             checkArgument(arr[i] >= 0 && arr[i] < arr.length,
-                    "Array element '%s' is out of range: [%s;%s]", arr[i], 0, arr.length - 1);
+                          "Array element '%s' is out of range: [%s;%s]", arr[i], 0, arr.length - 1);
 
             missedAndDup ^= i;
             missedAndDup ^= arr[i];

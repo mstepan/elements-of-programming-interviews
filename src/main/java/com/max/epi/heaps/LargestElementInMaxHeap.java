@@ -1,10 +1,16 @@
 package com.max.epi.heaps;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -16,7 +22,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class LargestElementInMaxHeap {
 
-    private static final Logger LOG = Logger.getLogger(LargestElementInMaxHeap.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int[] EMPTY_ARR = new int[0];
 
@@ -46,7 +52,7 @@ public class LargestElementInMaxHeap {
             /*
              * Access array field for PriorityQueue using reflection, otherwise
              * we need to use 'maxHeap.toArray(new Integer[0])', but this will add space complexity O(N).
-            */
+             */
             Field arrField = PriorityQueue.class.getDeclaredField("queue");
             arrField.setAccessible(true);
 
@@ -142,8 +148,12 @@ public class LargestElementInMaxHeap {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             HeapEntry heapEntry = (HeapEntry) o;
 

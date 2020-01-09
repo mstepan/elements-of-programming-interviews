@@ -1,6 +1,9 @@
 package com.max.epi.string;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -9,7 +12,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class ComputeAllMnemonicsForAPhoneNumber {
 
-    private static final Logger LOG = Logger.getLogger(ComputeAllMnemonicsForAPhoneNumber.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final char MIN_NO = '2';
     private static final char MAX_NO = '9';
@@ -63,7 +66,7 @@ public class ComputeAllMnemonicsForAPhoneNumber {
             ch = number.charAt(i);
             if (ch < MIN_NO || ch > MAX_NO) {
                 throw new IllegalArgumentException("Not a valid phone number passed for mnemonics: " + number +
-                        ", character '" + ch + "' not within range.");
+                                                           ", character '" + ch + "' not within range.");
             }
         }
     }

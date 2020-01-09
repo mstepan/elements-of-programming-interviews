@@ -1,13 +1,15 @@
 package com.max.epi.heaps;
 
+import com.google.common.base.Objects;
+import com.max.util.ArrayUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
-
-import com.google.common.base.Objects;
-import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -17,7 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class MergeSortedSequences {
 
-    private static final Logger LOG = Logger.getLogger(MergeSortedSequences.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private MergeSortedSequences() throws Exception {
 

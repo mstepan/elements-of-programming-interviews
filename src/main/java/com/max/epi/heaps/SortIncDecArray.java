@@ -2,9 +2,16 @@ package com.max.epi.heaps;
 
 
 import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -14,7 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class SortIncDecArray {
 
-    private static final Logger LOG = Logger.getLogger(SortIncDecArray.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private SortIncDecArray() {
 
@@ -172,8 +179,12 @@ public class SortIncDecArray {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             ArrayChunk that = (ArrayChunk) o;
 

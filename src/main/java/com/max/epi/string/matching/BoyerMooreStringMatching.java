@@ -1,9 +1,15 @@
 package com.max.epi.string.matching;
 
 import com.max.util.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -11,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class BoyerMooreStringMatching {
 
-    private static final Logger LOG = Logger.getLogger(BoyerMooreStringMatching.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private BoyerMooreStringMatching() throws Exception {
 
@@ -28,7 +34,7 @@ public class BoyerMooreStringMatching {
             if (actualIndex != expectedIndex) {
                 System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
                 throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
-                        pattern + "'");
+                                                        pattern + "'");
             }
 
             int actualIndexExtended = findExtended(str, pattern);
@@ -36,7 +42,7 @@ public class BoyerMooreStringMatching {
             if (actualIndexExtended != expectedIndex) {
                 System.out.printf("actualIndexExtended = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
                 throw new IllegalStateException("actualIndexExtended != expectedIndex for string '" + str + "' and pattern '" +
-                        pattern + "'");
+                                                        pattern + "'");
             }
         }
 

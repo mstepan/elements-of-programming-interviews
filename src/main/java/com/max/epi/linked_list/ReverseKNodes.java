@@ -1,14 +1,17 @@
 package com.max.epi.linked_list;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ReverseKNodes {
 
-    private static final Logger LOG = Logger.getLogger(ReverseKNodes.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private ReverseKNodes() throws Exception {
 

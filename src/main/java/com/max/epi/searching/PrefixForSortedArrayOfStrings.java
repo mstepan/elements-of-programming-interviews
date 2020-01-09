@@ -1,8 +1,10 @@
 package com.max.epi.searching;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -13,7 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class PrefixForSortedArrayOfStrings {
 
-    private static final Logger LOG = Logger.getLogger(PrefixForSortedArrayOfStrings.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private PrefixForSortedArrayOfStrings() throws Exception {
 

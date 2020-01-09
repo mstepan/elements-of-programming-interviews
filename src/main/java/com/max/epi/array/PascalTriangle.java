@@ -1,7 +1,9 @@
 package com.max.epi.array;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -9,7 +11,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class PascalTriangle {
 
-    private static final Logger LOG = Logger.getLogger(PascalTriangle.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private PascalTriangle() throws Exception {
 

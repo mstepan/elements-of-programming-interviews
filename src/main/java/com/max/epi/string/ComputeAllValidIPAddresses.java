@@ -1,13 +1,16 @@
 package com.max.epi.string;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ComputeAllValidIPAddresses {
 
-    private static final Logger LOG = Logger.getLogger(ComputeAllValidIPAddresses.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int IP4_OCTETS_COUNT = 4;
     private static final int MAX_IP4_OCTET_VALUE = 255;
@@ -82,7 +85,7 @@ public class ComputeAllValidIPAddresses {
     private static void checkValidIPString(String ipStr) {
         checkArgument(ipStr != null, "'ipStr' parameter is null");
         checkArgument(ipStr.length() >= MIN_IP4_STR_LENGTH && ipStr.length() <= MAX_IP4_STR_LENGTH,
-                "IP address very small or very big: %s", ipStr);
+                      "IP address very small or very big: %s", ipStr);
 
         for (int i = 0, ipStrLength = ipStr.length(); i < ipStrLength; ++i) {
             if (!Character.isDigit(ipStr.charAt(i))) {

@@ -1,13 +1,19 @@
 package com.max.epi.array;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 
 public class OnlineSampling {
 
-    private static final Logger LOG = Logger.getLogger(OnlineSampling.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private OnlineSampling() throws Exception {
 

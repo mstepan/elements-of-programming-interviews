@@ -1,7 +1,9 @@
 package com.max.epi.string;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class ConvertFromRomanToDecimal {
 
-    private static final Logger LOG = Logger.getLogger(ConvertFromRomanToDecimal.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final Map<Character, Integer> ROMAN_DIGITS = romanDigits();
     private static int[] NUMBERS = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
@@ -85,7 +87,7 @@ public class ConvertFromRomanToDecimal {
         for (int i = 0, strLength = str.length(); i < strLength; ++i) {
             if (!ROMAN_DIGITS.containsKey(str.charAt(i))) {
                 throw new IllegalArgumentException("'" + str + "' is not a valid Roman number, unknown digit '" +
-                        str.charAt(i) + "'");
+                                                           str.charAt(i) + "'");
             }
         }
     }

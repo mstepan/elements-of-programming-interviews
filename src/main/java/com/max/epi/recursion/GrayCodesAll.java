@@ -1,6 +1,7 @@
 package com.max.epi.recursion;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -13,8 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public final class GrayCodesAll {
 
-
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     /**
      * Generate all Gray codes of length 'K'.
@@ -65,7 +65,7 @@ public final class GrayCodesAll {
         long freeMemory = Runtime.getRuntime().freeMemory();
 
         checkArgument((1L << numBits) * Integer.BYTES <= freeMemory,
-                "Not enough memory to generate Gray codes (OutOfMemoryError will be thrown)");
+                      "Not enough memory to generate Gray codes (OutOfMemoryError will be thrown)");
     }
 
     private GrayCodesAll() {

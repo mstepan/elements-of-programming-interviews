@@ -1,6 +1,7 @@
 package com.max.epi.recursion;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class PowerSet {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     /**
      * time: O(2^n), can be reduced to O(N)

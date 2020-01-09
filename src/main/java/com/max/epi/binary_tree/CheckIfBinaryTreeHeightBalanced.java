@@ -1,7 +1,9 @@
 package com.max.epi.binary_tree;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,7 +11,7 @@ import static com.max.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class CheckIfBinaryTreeHeightBalanced {
 
-    private static final Logger LOG = Logger.getLogger(CheckIfBinaryTreeHeightBalanced.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final Random RAND = ThreadLocalRandom.current();
 

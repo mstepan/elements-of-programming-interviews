@@ -1,6 +1,7 @@
 package com.max.epi.recursion;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -15,9 +16,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public final class GenerateStringsOfMatchedParens {
 
-
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
-
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static List<String> generateMatchedParens(int n) {
         checkArgument(n >= 0);
@@ -37,7 +36,8 @@ public final class GenerateStringsOfMatchedParens {
         return allStrings;
     }
 
-    private static void gatherMatchedParensRec(int leftCnt, int rightCnt, char[] res, int index, int n, List<String> allStrings) {
+    private static void gatherMatchedParensRec(int leftCnt, int rightCnt, char[] res, int index, int n,
+                                               List<String> allStrings) {
 
         assert leftCnt >= rightCnt : "leftCnt < rightCnt";
 

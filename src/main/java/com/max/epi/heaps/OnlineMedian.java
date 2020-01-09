@@ -1,12 +1,14 @@
 package com.max.epi.heaps;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
-
-import org.apache.log4j.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -17,8 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class OnlineMedian {
 
-    private static final Logger LOG = Logger.getLogger(OnlineMedian.class);
-
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private OnlineMedian() throws Exception {
 

@@ -1,14 +1,17 @@
 package com.max.epi.linked_list;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class ReverseSingleSublist {
 
-    private static final Logger LOG = Logger.getLogger(ReverseSingleSublist.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private ReverseSingleSublist() throws Exception {
 

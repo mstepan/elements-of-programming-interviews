@@ -1,8 +1,10 @@
 package com.max.epi.hashing;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class AnanymousLetterFromMagazine {
 
-    private static final Logger LOG = Logger.getLogger(AnanymousLetterFromMagazine.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final Integer ONE_INTEGER = 1;
 
@@ -21,7 +23,7 @@ public final class AnanymousLetterFromMagazine {
 
         for (String magazine : magazines) {
             System.out.printf("canConstructLetterFromMagazine: %b %n",
-                    canConstructLetterFromMagazine(letter, magazine));
+                              canConstructLetterFromMagazine(letter, magazine));
         }
 
         System.out.printf("AnanymousLetterFromMagazine: java-%s %n", System.getProperty("java.version"));

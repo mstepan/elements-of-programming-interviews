@@ -1,12 +1,15 @@
 package com.max.epi.binary_tree;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class InOrderBinaryTreeTraversal {
 
-    private static final Logger LOG = Logger.getLogger(InOrderBinaryTreeTraversal.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private InOrderBinaryTreeTraversal() throws Exception {
 

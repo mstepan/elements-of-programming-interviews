@@ -1,8 +1,10 @@
 package com.max.epi.sorting;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -10,7 +12,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class IntersectSortedArrays {
 
-    private static final Logger LOG = Logger.getLogger(IntersectSortedArrays.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private IntersectSortedArrays() throws Exception {
 

@@ -1,8 +1,15 @@
 package com.max.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -11,7 +18,7 @@ public final class ArrayUtils {
 
     private static final String DEFAULT_ELEMS_DELIMITER = ", ";
 
-    private static final Logger LOG = Logger.getLogger(ArrayUtils.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final Random RAND = new Random();
 
@@ -287,7 +294,7 @@ public final class ArrayUtils {
 
         checkNotNull(arr, "null 'arr' passed");
         checkArgument(baseOffset != Integer.MIN_VALUE, "Incorrect 'baseOffset': %s (Integer.MIN_VALUE)",
-                baseOffset);
+                      baseOffset);
 
         if (arr.length < 2 || baseOffset == 0) {
             return 0;
@@ -899,7 +906,7 @@ public final class ArrayUtils {
 
         if (index1 < 0 || index2 < 0 || index1 >= arr.length || index2 >= arr.length) {
             throw new IllegalArgumentException("Illegal index passed, should be in range [0; " + (arr.length - 1) + "]: " +
-                    "index1 = " + index1 + ", index2 = " + index2);
+                                                       "index1 = " + index1 + ", index2 = " + index2);
         }
 
         if (index1 == index2) {
@@ -919,7 +926,7 @@ public final class ArrayUtils {
 
         if (index1 < 0 || index2 < 0 || index1 >= arr.length || index2 >= arr.length) {
             throw new IllegalArgumentException("Illegal index passed, should be in range [0; " + (arr.length - 1) + "]: " +
-                    "index1 = " + index1 + ", index2 = " + index2);
+                                                       "index1 = " + index1 + ", index2 = " + index2);
         }
 
         T temp = arr[index1];
@@ -982,7 +989,7 @@ public final class ArrayUtils {
 
         if (rank > maxRankValue) {
             throw new IllegalArgumentException("Rank too big, rank = " + rank + ", should be in range [0, " + maxRankValue +
-                    "]");
+                                                       "]");
         }
 
         int index1 = 0;

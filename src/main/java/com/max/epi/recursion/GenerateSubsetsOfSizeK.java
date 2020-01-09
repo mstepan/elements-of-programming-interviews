@@ -1,6 +1,7 @@
 package com.max.epi.recursion;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayDeque;
@@ -15,7 +16,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class GenerateSubsetsOfSizeK {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final class PartialCall {
         final int val;

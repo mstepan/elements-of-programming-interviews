@@ -1,6 +1,9 @@
 package com.max.epi.searching;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 /**
  * 12.5. Variant. Divide two floating point numbers, x/y within specific tolerance.
@@ -11,8 +14,7 @@ public class DivideFloatingPointNumbers {
     private static final double EPSILON = 0.0001;
     private static final double NEG_EPSILON = -EPSILON;
 
-    private static final Logger LOG = Logger.getLogger(DivideFloatingPointNumbers.class);
-
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private DivideFloatingPointNumbers() throws Exception {
 

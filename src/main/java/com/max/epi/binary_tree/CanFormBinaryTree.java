@@ -1,8 +1,10 @@
 package com.max.epi.binary_tree;
 
 import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import static com.max.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class CanFormBinaryTree {
 
-    private static final Logger LOG = Logger.getLogger(CanFormBinaryTree.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private CanFormBinaryTree() throws Exception {
 

@@ -1,15 +1,21 @@
 package com.max.epi.array;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.Collections;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class EnumerateAllPrimesToN {
 
-    private static final Logger LOG = Logger.getLogger(EnumerateAllPrimesToN.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int ZERO = 0;
     private static final int TWO = 2;
@@ -18,7 +24,7 @@ public class EnumerateAllPrimesToN {
 
         List<Integer> expectedPrimes =
                 Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
-                        79, 83, 89, 97, 101);
+                              79, 83, 89, 97, 101);
         System.out.println("expected: " + expectedPrimes);
 
         int n = 101;

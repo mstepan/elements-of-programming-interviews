@@ -1,7 +1,10 @@
 package com.max.epi.array;
 
 import com.max.util.MatrixUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.invoke.MethodHandles;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -10,7 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class SpiralOrderingOf2DArray {
 
-    private static final Logger LOG = Logger.getLogger(SpiralOrderingOf2DArray.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private SpiralOrderingOf2DArray() throws Exception {
 

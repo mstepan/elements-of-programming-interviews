@@ -1,6 +1,7 @@
 package com.max.epi.primitive;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 
@@ -11,7 +12,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class ClosestIntegerWithSameWeight {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private ClosestIntegerWithSameWeight() throws Exception {
         int value = 7;
@@ -29,8 +30,8 @@ public class ClosestIntegerWithSameWeight {
      */
     public static int closestWithSameWeight(int value) {
         checkArgument(value != 0 && value != -1, "Can't find closest value with same weight for '%s',  " +
-                        "binary representation '%s'",
-                value, Integer.toBinaryString(value));
+                              "binary representation '%s'",
+                      value, Integer.toBinaryString(value));
 
         int firstOneBit = value & ~(value - 1);
 

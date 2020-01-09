@@ -1,7 +1,8 @@
 package com.max.epi.primitive;
 
 import com.max.util.NumberUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Random;
@@ -13,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class PowerVariable {
 
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private PowerVariable() throws Exception {
 
@@ -34,7 +35,7 @@ public class PowerVariable {
 
             if (NumberUtils.compareRounded(expectedSum, actualSum, decimalPlacesAfterCommaToCompare) != 0) {
                 throw new IllegalStateException("Result is incorrect: expected = " + expectedSum + ", actual = " + actualSum +
-                        ", for x = " + x + " and y = " + y);
+                                                        ", for x = " + x + " and y = " + y);
             }
         }
 

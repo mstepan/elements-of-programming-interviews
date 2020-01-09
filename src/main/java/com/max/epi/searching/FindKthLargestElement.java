@@ -2,8 +2,10 @@ package com.max.epi.searching;
 
 
 import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -14,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class FindKthLargestElement {
 
-    private static final Logger LOG = Logger.getLogger(FindKthLargestElement.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private FindKthLargestElement() throws Exception {
 
@@ -45,7 +47,7 @@ public class FindKthLargestElement {
     public static int findKthLargest(int[] arr, int k) {
         checkNotNull(arr, "null 'arr' passed");
         checkArgument(k > 0 && k <= arr.length,
-                "Incorrect 'k' value, should be in range [1, %s], but k = %s", arr.length, k);
+                      "Incorrect 'k' value, should be in range [1, %s], but k = %s", arr.length, k);
 
         int from = 0;
         int to = arr.length - 1;

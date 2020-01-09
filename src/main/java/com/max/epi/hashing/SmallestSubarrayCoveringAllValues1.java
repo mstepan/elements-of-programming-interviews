@@ -1,9 +1,15 @@
 package com.max.epi.hashing;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -13,7 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class SmallestSubarrayCoveringAllValues1 {
 
-    private static final Logger LOG = Logger.getLogger(SmallestSubarrayCoveringAllValues1.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private SmallestSubarrayCoveringAllValues1() throws Exception {
 

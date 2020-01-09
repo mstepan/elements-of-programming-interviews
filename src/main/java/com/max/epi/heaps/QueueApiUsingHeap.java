@@ -1,8 +1,10 @@
 package com.max.epi.heaps;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -11,8 +13,7 @@ import java.util.Queue;
  */
 public class QueueApiUsingHeap {
 
-    private static final Logger LOG = Logger.getLogger(QueueApiUsingHeap.class);
-
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     static final class QueueAdapter {
 
@@ -94,8 +95,12 @@ public class QueueApiUsingHeap {
 
             @Override
             public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
+                if (this == o) {
+                    return true;
+                }
+                if (o == null || getClass() != o.getClass()) {
+                    return false;
+                }
 
                 QueueEntry that = (QueueEntry) o;
 

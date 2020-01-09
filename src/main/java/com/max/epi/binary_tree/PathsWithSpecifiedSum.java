@@ -1,16 +1,22 @@
 package com.max.epi.binary_tree;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.max.epi.binary_tree.BinaryTree.BinaryTreeNode;
 
 public class PathsWithSpecifiedSum {
 
-    private static final Logger LOG = Logger.getLogger(PathsWithSpecifiedSum.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private PathsWithSpecifiedSum() throws Exception {
 

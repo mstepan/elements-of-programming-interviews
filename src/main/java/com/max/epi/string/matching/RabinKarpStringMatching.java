@@ -1,8 +1,10 @@
 package com.max.epi.string.matching;
 
 import com.max.util.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -10,7 +12,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class RabinKarpStringMatching {
 
-    private static final Logger LOG = Logger.getLogger(RabinKarpStringMatching.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int BASE = 257;
     private static final int BIG_PRIME = 7_368_787;
@@ -41,7 +43,7 @@ public class RabinKarpStringMatching {
             if (actualIndex != expectedIndex) {
                 System.out.printf("actualIndex = %d, expectedIndex = %d %n", actualIndex, expectedIndex);
                 throw new IllegalStateException("actualIndex != expectedIndex for string '" + str + "' and pattern '" +
-                        pattern + "'");
+                                                        pattern + "'");
             }
         }
 
@@ -59,7 +61,7 @@ public class RabinKarpStringMatching {
         checkArgument(str != null, "null 'str' argument passed");
         checkArgument(pattern != null, "null 'pattern' argument passed");
         checkArgument(str.length() >= pattern.length(), "str.length < pattern.length: %s < %s",
-                str.length(), pattern.length());
+                      str.length(), pattern.length());
 
         final int strLength = str.length();
         final int patternLength = pattern.length();

@@ -1,8 +1,10 @@
 package com.max.epi;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Optional;
 
@@ -10,7 +12,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class AbsSortedMain {
 
-    private static final Logger LOG = Logger.getLogger(AbsSortedMain.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private AbsSortedMain() throws Exception {
 

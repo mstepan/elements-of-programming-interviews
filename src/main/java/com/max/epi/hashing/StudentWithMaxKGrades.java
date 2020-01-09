@@ -2,9 +2,19 @@ package com.max.epi.hashing;
 
 
 import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -14,7 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class StudentWithMaxKGrades {
 
-    private static final Logger LOG = Logger.getLogger(StudentWithMaxKGrades.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final int MAX_GRADE = 100;
 

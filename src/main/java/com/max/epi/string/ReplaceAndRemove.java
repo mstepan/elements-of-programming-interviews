@@ -1,7 +1,9 @@
 package com.max.epi.string;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -9,7 +11,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class ReplaceAndRemove {
 
-    private static final Logger LOG = Logger.getLogger(ReplaceAndRemove.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private ReplaceAndRemove() throws Exception {
 
@@ -54,7 +56,7 @@ public class ReplaceAndRemove {
         final int newLength = calculateNewLength(arr, length);
 
         checkArgument(newLength <= arr.length, "Check failed 'newLength <= arr.length': newLength = %s, arr.length = %s",
-                newLength, arr.length);
+                      newLength, arr.length);
 
         int index = removeB(arr, length);
 

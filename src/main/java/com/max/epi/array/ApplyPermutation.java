@@ -1,14 +1,16 @@
 package com.max.epi.array;
 
 import com.max.util.ArrayUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 
 public class ApplyPermutation {
 
-    private static final Logger LOG = Logger.getLogger(ApplyPermutation.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private ApplyPermutation() throws Exception {
 

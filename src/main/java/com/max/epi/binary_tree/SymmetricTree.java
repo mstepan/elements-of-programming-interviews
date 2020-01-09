@@ -1,8 +1,10 @@
 package com.max.epi.binary_tree;
 
 import com.max.util.Pair;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -14,7 +16,7 @@ import static com.max.epi.binary_tree.BinaryTree.BinaryTreeNode;
  */
 public final class SymmetricTree {
 
-    private static final Logger LOG = Logger.getLogger(SymmetricTree.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private SymmetricTree() throws Exception {
 
