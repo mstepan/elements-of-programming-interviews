@@ -11,7 +11,7 @@
         <google.guava.version>21.0</google.guava.version>
         <valid4j.version>0.5.0</valid4j.version>
         <log4j.version>2.13.0</log4j.version>
-        <junit4.version>4.12</junit4.version>
+        <junit4.version>4.13.1</junit4.version>
         <assertj.version>3.13.2</assertj.version>
         <pitest.version>1.4.0</pitest.version>
         <surfire.plugin.version>2.20.1</surfire.plugin.version>
