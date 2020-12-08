@@ -1,16 +1,9 @@
 package com.max.epi.array;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.lang.invoke.MethodHandles;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 final class AddBinaryStrings {
-
-    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     private static char ZERO_CHAR = '0';
     private static char ONE_CHAR = '1';
