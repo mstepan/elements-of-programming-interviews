@@ -1,4 +1,4 @@
-package com.max.epi.primitive;
+package com.max.epi.primitive.rectangle;
 
 import com.max.util.NumberUtils;
 import org.apache.logging.log4j.LogManager;
