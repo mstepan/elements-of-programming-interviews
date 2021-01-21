@@ -9,6 +9,24 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class RectangleIntersectionTest {
 
     @Test
+    public void r1IntersectsWithR2FromLeftToRight() {
+        Rectangle r1 = Rectangle.of(4, 3, 6, 8);
+        Rectangle r2 = Rectangle.of(2, 5, 8, 6);
+
+        assertThat(RectangleIntersection.findIntersection(r1, r2)).
+                hasValue(Rectangle.of(4, 5, 6, 6));
+    }
+
+    @Test
+    public void r1IntersectsWithR2InRightBottomCorner() {
+        Rectangle r1 = Rectangle.of(5, 1, 11, 4);
+        Rectangle r2 = Rectangle.of(10, 0, 14, 2);
+
+        assertThat(RectangleIntersection.findIntersection(r1, r2)).
+                hasValue(Rectangle.of(10, 1, 11, 2));
+    }
+
+    @Test
     public void r1IntersectsWithR2InOnePoint() {
         Rectangle r1 = Rectangle.of(6, 1, 9, 9);
         Rectangle r2 = Rectangle.of(9, 9, 13, 12);
