@@ -1,16 +1,9 @@
 package com.max.epi.string;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.lang.invoke.MethodHandles;
-
 import static com.google.common.base.Preconditions.checkArgument;
+import java.util.Objects;
 
-
-public class ComputeAllValidIPAddresses {
-
-    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+public final class ComputeAllValidIPAddresses {
 
     private static final int IP4_OCTETS_COUNT = 4;
     private static final int MAX_IP4_OCTET_VALUE = 255;
@@ -20,16 +13,8 @@ public class ComputeAllValidIPAddresses {
 
     private static final int ZERO_CHARACTER_CODE = '0';
 
-    private ComputeAllValidIPAddresses() throws Exception {
-
-        printAllIPs("19216811");
-//        printAllIPs("79216811");
-
-//        printAllIPs("19216a11");
-//        printAllIPs("0000");
-//        printAllIPs("255255255355");
-
-        System.out.printf("Main done: java-%s %n", System.getProperty("java.version"));
+    private ComputeAllValidIPAddresses() {
+        throw new AssertionError("Can't instantiate utility-only function");
     }
 
     /**
@@ -38,7 +23,7 @@ public class ComputeAllValidIPAddresses {
      * time: O(3^4) ~ O(1)
      * space: O(1)
      */
-    public static void printAllIPs(String ipStr) {
+    public static void printAllIPsRecursiveSolution(String ipStr) {
         checkValidIPString(ipStr);
         printAllIPsRec(ipStr.toCharArray(), 0, new int[IP4_OCTETS_COUNT], 0);
     }
@@ -94,13 +79,83 @@ public class ComputeAllValidIPAddresses {
         }
     }
 
+
+    public static void printAllValidIpsIterativeSolution(String str) {
+        Objects.requireNonNull(str, "NULL 'str' detected");
+
+        if (str.length() < 4) {
+            throw new IllegalArgumentException("Can't find any valid IPs");
+        }
+
+        int first = 0;
+
+        for (int i = 0; i < 3 && i < str.length(); ++i) {
+
+            first = first * 10 + toDigit(str.charAt(i));
+
+            if (first < 256) {
+                int second = 0;
+
+                for (int j = i + 1; j <= i + 3 && j < str.length(); ++j) {
+                    second = second * 10 + toDigit(str.charAt(j));
+
+                    if (second < 256) {
+                        int third = 0;
+
+                        for (int k = j + 1; k <= j + 3 && k < str.length() - 1; ++k) {
+                            third = third * 10 + toDigit(str.charAt(k));
+
+                            if (third < 256) {
+                                int fourth = toNumber(str, k + 1);
+
+                                if (fourth < 256) {
+                                    System.out.printf("%d.%d.%d.%d%n", first, second, third, fourth);
+                                }
+                            }
+
+                            if (third == 0) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (second == 0) {
+                        break;
+                    }
+                }
+            }
+
+            if (first == 0) {
+                break;
+            }
+        }
+    }
+
+    private static int toNumber(String str, int from) {
+
+        int digitsCnt = str.length() - from;
+
+        if (digitsCnt < 1 || digitsCnt > 3) {
+            return 256;
+        }
+
+        if (digitsCnt > 1 && toDigit(str.charAt(from)) == 0) {
+            return 256;
+        }
+
+        return Integer.parseInt(str.substring(from));
+    }
+
+    private static int toDigit(char ch) {
+        return ch - '0';
+    }
+
     public static void main(String[] args) {
-        try {
-            new ComputeAllValidIPAddresses();
-        }
-        catch (Exception ex) {
-            LOG.error(ex.getMessage(), ex);
-        }
+        printAllIPsRecursiveSolution("19216811");
+
+//        printAllValidIpsIterativeSolution("19216811");
+
+        System.out.println("ComputeAllValidIPAddresses done");
     }
 
 
