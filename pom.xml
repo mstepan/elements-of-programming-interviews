@@ -9,7 +9,7 @@
     <properties>
         <java.version>15</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <google.guava.version>24.1.1-jre</google.guava.version>
+        <google.guava.version>29.0-jre</google.guava.version>
         <valid4j.version>0.5.0</valid4j.version>
         <log4j.version>2.13.2</log4j.version>
         <junit4.version>4.13.1</junit4.version>
